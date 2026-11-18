@@ -77,7 +77,7 @@
       font-family: var(--font-mono);
     }
 
-    /* ================= 1. AUTH / LOGIN / REGISTER SCREENS ================= */
+    /* ================= 1. AUTH / LOGIN / PUBLIC REGISTER SCREENS ================= */
     .auth-wrapper {
       min-height: 100vh;
       display: flex;
@@ -249,6 +249,17 @@
 
     .link-btn:hover {
       text-decoration: underline;
+    }
+
+    .privacy-note {
+      background: var(--bg-subtle);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      padding: 10px 12px;
+      font-size: 0.8rem;
+      color: var(--text-secondary);
+      margin-bottom: 16px;
+      line-height: 1.5;
     }
 
     @keyframes shake {
@@ -794,13 +805,12 @@
       border-top: 1px solid var(--border-color);
     }
 
-    /* Admin Section blocks */
     .admin-box {
       background: var(--bg-subtle);
       border: 1px solid var(--border-color);
       border-radius: var(--radius-md);
       padding: 16px;
-      margin-bottom: 18px;
+      margin-bottom: 16px;
     }
 
     .admin-box h4 {
@@ -813,34 +823,6 @@
       font-size: 0.82rem;
       color: var(--text-secondary);
       margin-bottom: 12px;
-    }
-
-    .member-list {
-      list-style: none;
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-    }
-
-    .member-item {
-      background: var(--bg-surface);
-      border: 1px solid var(--border-color);
-      border-radius: var(--radius-sm);
-      padding: 10px 12px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      font-size: 0.85rem;
-    }
-
-    .role-pill {
-      font-size: 0.72rem;
-      font-weight: 600;
-      padding: 2px 8px;
-      border-radius: 999px;
-      background: var(--accent-navy-light);
-      color: var(--accent-navy);
-      margin-left: 8px;
     }
 
     .toast-container {
@@ -907,7 +889,7 @@
 </head>
 <body>
 
-  <!-- ================= 1. AUTH / LOGIN / MEMBER SIGNUP SCREENS ================= -->
+  <!-- ================= 1. AUTH / LOGIN / OPEN PUBLIC SIGNUP SCREENS ================= -->
   <div id="authWrapper" class="auth-wrapper">
     <div id="authCard" class="auth-card">
 
@@ -915,10 +897,10 @@
       <div id="authLoadingView">
         <span class="diary-tag">🔒 Encrypted Journal</span>
         <h2 class="auth-title serif-heading">Personal Diary</h2>
-        <p class="auth-subtitle">Connecting to your encrypted diary...</p>
+        <p class="auth-subtitle">Loading your diary...</p>
       </div>
 
-      <!-- B. Daily Login Screen (Clean: No "Update Token" button!) -->
+      <!-- B. Unified Login Screen (Works for Admin Cloud Account AND Public Local Accounts) -->
       <div id="loginView" style="display: none;">
         <span class="diary-tag">🔒 Private Journal</span>
         <h2 class="auth-title serif-heading">Personal Diary</h2>
@@ -938,7 +920,7 @@
           </button>
         </form>
 
-        <!-- Emergency Admin Token Recovery (Only appears if Admin email+password is valid AND GitHub says token expired) -->
+        <!-- Emergency Admin Token Recovery (Only appears if Admin email+password is verified AND GitHub reports expired token) -->
         <div id="expiredTokenBox" style="display: none; margin-top: 16px; padding-top: 14px; border-top: 1px solid var(--border-color);">
           <label class="form-label" style="color: var(--danger);">GitHub Token Expired — Paste New Token (Admin Verified)</label>
           <input type="password" id="emergencyTokenInput" class="form-input mono" placeholder="ghp_..." style="margin-bottom: 10px;" />
@@ -951,22 +933,26 @@
           <button type="button" class="link-btn" onclick="showPreLoginPasswordChange()">
             Change Password
           </button>
-          <button type="button" id="registerLinkBtn" class="link-btn" onclick="showMemberRegisterView()">
-            New Member? Register →
+          <button type="button" class="link-btn" onclick="showPublicRegisterView()">
+            Create Account →
           </button>
         </div>
       </div>
 
-      <!-- C. New Member Registration View (Requires Admin Invite Code) -->
-      <div id="memberRegisterView" style="display: none;">
-        <span class="diary-tag">✨ Member Registration</span>
-        <h2 class="auth-title serif-heading">Create Member Diary</h2>
-        <p class="auth-subtitle">Enter your email, choose a password, and enter the Invite Code provided by the administrator.</p>
+      <!-- C. Open Public Account Registration (Zero Invite Code Needed — Encrypted Local Browser Vault) -->
+      <div id="publicRegisterView" style="display: none;">
+        <span class="diary-tag">✨ Create Free Account</span>
+        <h2 class="auth-title serif-heading">Create Personal Diary</h2>
+        <p class="auth-subtitle">Register with your email and password to start your own encrypted diary.</p>
 
-        <form id="memberRegisterForm">
+        <div class="privacy-note">
+          🔒 <strong>100% Private on Your Device:</strong> Your diary entries are encrypted with AES-256 using your Email & Password and stored privately inside your browser's local storage.
+        </div>
+
+        <form id="publicRegisterForm">
           <div class="form-group">
             <label class="form-label">Your Name</label>
-            <input type="text" id="regName" class="form-input" placeholder="e.g. Aditi" required />
+            <input type="text" id="regName" class="form-input" placeholder="Enter your name" required />
           </div>
           <div class="form-group">
             <label class="form-label">Email Address</label>
@@ -974,7 +960,7 @@
           </div>
           <div class="form-row">
             <div class="form-group">
-              <label class="form-label">Create Password</label>
+              <label class="form-label">Password</label>
               <input type="password" id="regPassword" class="form-input" placeholder="Min 6 characters" minlength="6" required />
             </div>
             <div class="form-group">
@@ -982,12 +968,8 @@
               <input type="password" id="regConfirm" class="form-input" placeholder="Repeat password" minlength="6" required />
             </div>
           </div>
-          <div class="form-group">
-            <label class="form-label">Invite Code</label>
-            <input type="password" id="regInviteCode" class="form-input" placeholder="Enter secret invite code..." required />
-          </div>
           <button type="submit" id="regBtn" class="btn btn-primary btn-full">
-            Create Encrypted Diary
+            Create My Diary
           </button>
         </form>
 
@@ -1000,7 +982,7 @@
         </div>
       </div>
 
-      <!-- D. Change Password BEFORE Login View -->
+      <!-- D. Change Password BEFORE Login View (Works for both Admin Cloud & Public Local Accounts) -->
       <div id="preChangePassView" style="display: none;">
         <span class="diary-tag">🔑 Password Settings</span>
         <h2 class="auth-title serif-heading">Change Password</h2>
@@ -1039,11 +1021,11 @@
         </div>
       </div>
 
-      <!-- E. One-Time Admin Setup View (Only shown before v2 is initialized) -->
+      <!-- E. One-Time Admin Setup View (Only shown before Admin account is initialized) -->
       <div id="setupView" style="display: none;">
         <span class="diary-tag">⚙️ One-Time Admin Setup</span>
         <h2 class="auth-title serif-heading">Initialize Admin Account</h2>
-        <p class="auth-subtitle">Set up your Admin Email & Password, your GitHub Token, and the Invite Code for new members.</p>
+        <p class="auth-subtitle">Set up your Admin Email & Password and link your private GitHub repository (`diary-vault`).</p>
 
         <form id="setupForm">
           <div class="form-row">
@@ -1067,14 +1049,10 @@
             </div>
           </div>
           <div class="form-group">
-            <label class="form-label">Member Invite Code (Share this with family/friends you invite)</label>
-            <input type="text" id="setupInviteCode" class="form-input" placeholder="e.g. FamilyDiary2026" required />
-          </div>
-          <div class="form-group">
             <label class="form-label">GitHub Personal Access Token (diary-forever)</label>
             <input type="password" id="setupToken" class="form-input mono" placeholder="ghp_..." required />
           </div>
-          <div class="form-row" style="display: none;">
+          <div style="display: none;">
             <input type="text" id="setupOwner" value="pranavkmishra18" />
             <input type="text" id="setupPublicRepo" value="diary" />
             <input type="text" id="setupPrivateRepo" value="diary-vault" />
@@ -1125,7 +1103,7 @@
 
         <!-- Strictly visible ONLY to Admin -->
         <button id="adminSettingsBtn" class="btn btn-secondary btn-sm" style="display: none;" onclick="openAdminModal()">
-          ⚙️ Admin
+          ⚙️ Token Settings
         </button>
 
         <button class="btn btn-secondary btn-sm" onclick="openInAppPasswordModal()">
@@ -1151,7 +1129,7 @@
         <div class="action-banner">
           <div class="action-banner-left">
             <h2 class="serif-heading" id="bannerWelcome">My Journal</h2>
-            <p>Organized by Month and Date & Day. Latest entries always appear at the top.</p>
+            <p id="bannerSubtext">Organized by Month and Date & Day. Latest entries always appear at the top.</p>
           </div>
           <div class="action-banner-buttons">
             <button class="btn btn-secondary" onclick="openMonthModal()">
@@ -1271,39 +1249,21 @@
     </div>
   </div>
 
-  <!-- ================= MODAL 4: ADMIN-ONLY PANEL (TOKEN, INVITE CODE, MEMBERS) ================= -->
+  <!-- ================= MODAL 4: ADMIN-ONLY TOKEN SETTINGS ================= -->
   <div id="adminModal" class="modal-backdrop">
-    <div class="modal-card">
+    <div class="modal-card" style="max-width: 480px;">
       <div class="modal-header">
-        <h3 class="serif-heading">Admin Control Panel</h3>
+        <h3 class="serif-heading">Admin GitHub Token Settings</h3>
         <button class="icon-btn" onclick="closeAdminModal()">✕</button>
       </div>
 
-      <!-- 1. Update Member Invite Code -->
-      <div class="admin-box">
-        <h4>1. Member Invite Code</h4>
-        <p>Only people who know this Invite Code can create a new member account on the login page.</p>
-        <div style="display: flex; gap: 10px;">
-          <input type="text" id="adminInviteInput" class="form-input" placeholder="Enter new invite code (or leave blank to disable signups)" />
-          <button type="button" class="btn btn-primary btn-sm" onclick="adminUpdateInviteCode()">Save Invite Code</button>
-        </div>
-      </div>
-
-      <!-- 2. Update GitHub Personal Access Token (Hidden from everyone except Admin) -->
-      <div class="admin-box">
-        <h4>2. Update GitHub Personal Access Token</h4>
-        <p>Rotate your GitHub token here anytime. It will be re-encrypted inside your Admin lock and Invite lock.</p>
+      <div class="admin-box" style="margin-bottom: 0;">
+        <h4>Update GitHub Personal Access Token</h4>
+        <p>Rotate your GitHub token anytime. Your token is encrypted solely behind your Admin Email & Password and is never shared with public visitors.</p>
         <div style="display: flex; gap: 10px;">
           <input type="password" id="adminNewTokenInput" class="form-input mono" placeholder="ghp_..." />
           <button type="button" class="btn btn-primary btn-sm" onclick="adminUpdateToken()">Update Token</button>
         </div>
-      </div>
-
-      <!-- 3. Registered Accounts List -->
-      <div class="admin-box" style="margin-bottom: 0;">
-        <h4>3. Registered Diary Accounts</h4>
-        <p>Each member has a separate encrypted diary file in <code>diary-vault</code>.</p>
-        <ul id="adminMembersList" class="member-list"></ul>
       </div>
 
       <div class="modal-footer">
@@ -1324,7 +1284,8 @@
       publicRepo: 'diary',
       privateRepo: 'diary-vault',
       authFile: 'auth.json',
-      adminDiaryFile: 'diary.json'
+      adminDiaryFile: 'diary.json',
+      localUsersKey: 'personal_diary_public_users_v3'
     };
 
     const INACTIVITY_LIMIT_MS = 5 * 60 * 1000; // 5 minutes
@@ -1332,6 +1293,7 @@
 
     let session = {
       unlocked: false,
+      storageMode: 'github', // 'github' (Admin) | 'local' (Public Visitor)
       email: null,
       userHash: null,
       password: null,
@@ -1344,7 +1306,7 @@
       privateRepo: DEFAULT_CONFIG.privateRepo,
       diarySha: null,
       authSha: null,
-      authRegistry: null, // Holds v2 auth.json structure
+      authRegistry: null,
       diaryData: { months: [] },
       lastActivity: Date.now(),
       timerInterval: null,
@@ -1399,7 +1361,7 @@
 
     async function hashEmailToId(email) {
       const clean = normalizeEmail(email);
-      const digest = await crypto.subtle.digest('SHA-256', enc.encode('diary_user_v2::' + clean));
+      const digest = await crypto.subtle.digest('SHA-256', enc.encode('diary_user_v3::' + clean));
       const arr = Array.from(new Uint8Array(digest));
       return arr.map(b => b.toString(16).padStart(2, '0')).join('').slice(0, 20);
     }
@@ -1434,7 +1396,7 @@
       const cipherBuffer = await crypto.subtle.encrypt({ name: 'AES-GCM', iv }, key, plainBytes);
 
       return {
-        v: 2,
+        v: 3,
         iter: PBKDF2_ITERATIONS,
         salt: bytesToBase64(salt),
         iv: bytesToBase64(iv),
@@ -1456,7 +1418,22 @@
     }
 
     /********************************************************************
-     * 3. GITHUB REST API HELPERS
+     * 3. LOCAL STORAGE HELPERS (FOR PUBLIC VISITORS)
+     ********************************************************************/
+    function getLocalUsersMap() {
+      try {
+        return JSON.parse(localStorage.getItem(DEFAULT_CONFIG.localUsersKey) || '{}');
+      } catch {
+        return {};
+      }
+    }
+
+    function saveLocalUsersMap(map) {
+      localStorage.setItem(DEFAULT_CONFIG.localUsersKey, JSON.stringify(map));
+    }
+
+    /********************************************************************
+     * 4. GITHUB REST API HELPERS (FOR ADMIN CLOUD VAULT)
      ********************************************************************/
     async function githubGetFile(owner, repo, path, token = null) {
       const headers = { 'Accept': 'application/vnd.github.v3+json' };
@@ -1509,7 +1486,7 @@
     }
 
     /********************************************************************
-     * 4. BOOT & VIEW SWITCHING
+     * 5. BOOT & VIEW SWITCHING
      ********************************************************************/
     async function loadLatestAuthRegistry() {
       let authFile = await githubGetFile(
@@ -1536,8 +1513,8 @@
 
       try {
         const authFile = await loadLatestAuthRegistry();
-        // Check for v2 multi-user registry format
-        if (authFile && authFile.content && authFile.content.v === 2 && authFile.content.users) {
+        // Recognize both v2 and v3 Admin registries
+        if (authFile && authFile.content && (authFile.content.v === 3 || authFile.content.v === 2) && authFile.content.users) {
           session.authRegistry = authFile.content;
           session.authSha = authFile.sha;
           session.owner = authFile.content.owner || DEFAULT_CONFIG.owner;
@@ -1545,7 +1522,6 @@
           session.privateRepo = authFile.content.privateRepo || DEFAULT_CONFIG.privateRepo;
           showLoginView();
         } else {
-          // First-time v2 initialization
           showSetupView();
         }
       } catch (e) {
@@ -1554,7 +1530,7 @@
     }
 
     function hideAllAuthViews() {
-      ['authLoadingView', 'loginView', 'memberRegisterView', 'preChangePassView', 'setupView'].forEach(id => {
+      ['authLoadingView', 'loginView', 'publicRegisterView', 'preChangePassView', 'setupView'].forEach(id => {
         document.getElementById(id).style.display = 'none';
       });
       document.getElementById('expiredTokenBox').style.display = 'none';
@@ -1581,15 +1557,13 @@
     function showLoginView() {
       hideAllAuthViews();
       document.getElementById('loginView').style.display = 'block';
-      const hasInvite = session.authRegistry && session.authRegistry.inviteLock;
-      document.getElementById('registerLinkBtn').style.display = hasInvite ? 'inline-flex' : 'none';
       setTimeout(() => document.getElementById('loginEmail').focus(), 50);
     }
 
-    function showMemberRegisterView() {
+    function showPublicRegisterView() {
       hideAllAuthViews();
-      document.getElementById('memberRegisterView').style.display = 'block';
-      document.getElementById('memberRegisterForm').reset();
+      document.getElementById('publicRegisterView').style.display = 'block';
+      document.getElementById('publicRegisterForm').reset();
       setTimeout(() => document.getElementById('regName').focus(), 50);
     }
 
@@ -1606,7 +1580,7 @@
     }
 
     /********************************************************************
-     * 5. ONE-TIME ADMIN SETUP (CREATES ADMIN + INVITE CODE)
+     * 6. ONE-TIME ADMIN SETUP (GITHUB CLOUD VAULT)
      ********************************************************************/
     document.getElementById('setupForm').addEventListener('submit', async (e) => {
       e.preventDefault();
@@ -1616,7 +1590,6 @@
       const email = normalizeEmail(document.getElementById('setupEmail').value);
       const password = document.getElementById('setupPassword').value;
       const confirm = document.getElementById('setupConfirm').value;
-      const inviteCode = document.getElementById('setupInviteCode').value.trim();
       const token = document.getElementById('setupToken').value.trim();
       const owner = document.getElementById('setupOwner').value.trim();
       const publicRepo = document.getElementById('setupPublicRepo').value.trim();
@@ -1634,7 +1607,6 @@
         const userHash = await hashEmailToId(email);
         const secret = compositeSecret(email, password);
 
-        // 1. Encrypt Admin Lock with Email + Password
         const adminLock = await encryptPayload({
           token,
           owner,
@@ -1645,34 +1617,25 @@
           diaryFile: DEFAULT_CONFIG.adminDiaryFile
         }, secret);
 
-        // 2. Encrypt Invite Lock with Invite Code so invited members can register
-        const inviteLock = inviteCode
-          ? await encryptPayload({ token, owner, publicRepo, privateRepo }, `invite::${inviteCode}`)
-          : null;
-
         const registry = {
-          v: 2,
+          v: 3,
           owner,
           publicRepo,
           privateRepo,
-          inviteLock,
           users: {
             [userHash]: {
               role: 'admin',
               displayName,
               diaryFile: DEFAULT_CONFIG.adminDiaryFile,
-              createdAt: new Date().toISOString().slice(0, 10),
               lock: adminLock
             }
           }
         };
 
-        // 3. Check if diary.json already exists in diary-vault
         let existingDiary = await githubGetFile(owner, privateRepo, DEFAULT_CONFIG.adminDiaryFile, token);
         let initialDiaryData = null;
 
         if (existingDiary && existingDiary.content && existingDiary.content.ct) {
-          // Try decrypting with password alone (if upgrading from v1) or email+password
           try {
             initialDiaryData = await decryptPayload(existingDiary.content, secret);
           } catch {
@@ -1703,13 +1666,14 @@
           publicRepo,
           DEFAULT_CONFIG.authFile,
           registry,
-          'Initialize multi-member auth registry',
+          'Initialize Admin auth lock',
           token
         );
 
         session = {
           ...session,
           unlocked: true,
+          storageMode: 'github',
           email,
           userHash,
           password,
@@ -1769,8 +1733,14 @@
     }
 
     /********************************************************************
-     * 6. DAILY SIGN IN (ADMIN & MEMBERS)
+     * 7. UNIFIED SIGN IN (CHECKS ADMIN CLOUD VAULT FIRST, THEN LOCAL USERS)
      ********************************************************************/
+    async function computeLegacyV2Hash(email) {
+      const clean = normalizeEmail(email);
+      const digest = await crypto.subtle.digest('SHA-256', enc.encode('diary_user_v2::' + clean));
+      return Array.from(new Uint8Array(digest)).map(b => b.toString(16).padStart(2, '0')).join('').slice(0, 20);
+    }
+
     document.getElementById('loginForm').addEventListener('submit', async (e) => {
       e.preventDefault();
       clearStatusMessages();
@@ -1785,70 +1755,103 @@
       btn.textContent = 'Signing In...';
 
       try {
+        const secret = compositeSecret(email, password);
+        const v3Hash = await hashEmailToId(email);
+        const v2Hash = await computeLegacyV2Hash(email);
+
+        // 1. Check Admin / Cloud Registry first
         const freshAuth = await loadLatestAuthRegistry();
-        if (freshAuth && freshAuth.content && freshAuth.content.v === 2) {
+        if (freshAuth && freshAuth.content && freshAuth.content.users) {
           session.authRegistry = freshAuth.content;
           session.authSha = freshAuth.sha;
         }
 
-        const userHash = await hashEmailToId(email);
-        const userRecord = session.authRegistry && session.authRegistry.users
-          ? session.authRegistry.users[userHash]
-          : null;
+        const cloudUsers = (session.authRegistry && session.authRegistry.users) || {};
+        const cloudRecord = cloudUsers[v3Hash] || cloudUsers[v2Hash];
+        const activeCloudHash = cloudUsers[v3Hash] ? v3Hash : v2Hash;
 
-        if (!userRecord) {
+        if (cloudRecord) {
+          let unlockedLock;
+          try {
+            unlockedLock = await decryptPayload(cloudRecord.lock, secret);
+          } catch {
+            throw new Error('Invalid email or password.');
+          }
+
+          const { token, owner, publicRepo, privateRepo, role, displayName, diaryFile } = unlockedLock;
+          const targetDiaryFile = diaryFile || cloudRecord.diaryFile || DEFAULT_CONFIG.adminDiaryFile;
+
+          let diaryFileRes;
+          try {
+            diaryFileRes = await githubGetFile(owner, privateRepo, targetDiaryFile, token);
+          } catch (apiErr) {
+            if (apiErr.status === 401 && (role === 'admin' || cloudRecord.role === 'admin')) {
+              session.pendingAdminRecovery = { email, password, userHash: activeCloudHash, unlockedLock };
+              document.getElementById('expiredTokenBox').style.display = 'block';
+              throw new Error('Your GitHub token has expired. Paste a replacement token above to unlock.');
+            }
+            throw apiErr;
+          }
+
+          let diaryData;
+          let diarySha = null;
+
+          if (diaryFileRes && diaryFileRes.content) {
+            diaryData = await decryptPayload(diaryFileRes.content, secret);
+            diarySha = diaryFileRes.sha;
+          } else {
+            diaryData = createStarterDiaryData(displayName || cloudRecord.displayName);
+          }
+
+          session = {
+            ...session,
+            unlocked: true,
+            storageMode: 'github',
+            email,
+            userHash: activeCloudHash,
+            password,
+            displayName: displayName || cloudRecord.displayName || 'Pranav',
+            role: role || cloudRecord.role || 'admin',
+            diaryFileName: targetDiaryFile,
+            token,
+            owner,
+            publicRepo,
+            privateRepo,
+            diarySha,
+            diaryData
+          };
+
+          document.getElementById('loginPassword').value = '';
+          enterUnlockedApp();
+          return;
+        }
+
+        // 2. Otherwise check Public Visitor Local Browser Storage
+        const localUsers = getLocalUsersMap();
+        const localRecord = localUsers[v3Hash];
+
+        if (!localRecord) {
           throw new Error('Invalid email or password.');
         }
 
-        const secret = compositeSecret(email, password);
-        let unlockedLock;
+        let localDiaryData;
         try {
-          unlockedLock = await decryptPayload(userRecord.lock, secret);
+          localDiaryData = await decryptPayload(localRecord.encryptedDiary, secret);
         } catch {
           throw new Error('Invalid email or password.');
-        }
-
-        const { token, owner, publicRepo, privateRepo, role, displayName, diaryFile } = unlockedLock;
-        const targetDiaryFile = diaryFile || userRecord.diaryFile || DEFAULT_CONFIG.adminDiaryFile;
-
-        // Fetch user's isolated encrypted diary file from diary-vault
-        let diaryFileRes;
-        try {
-          diaryFileRes = await githubGetFile(owner, privateRepo, targetDiaryFile, token);
-        } catch (apiErr) {
-          if (apiErr.status === 401 && (role === 'admin' || userRecord.role === 'admin')) {
-            session.pendingAdminRecovery = { email, password, userHash, unlockedLock };
-            document.getElementById('expiredTokenBox').style.display = 'block';
-            throw new Error('Your GitHub token has expired. Because your Admin login was verified, you can paste a new token above.');
-          }
-          throw apiErr;
-        }
-
-        let diaryData;
-        let diarySha = null;
-
-        if (diaryFileRes && diaryFileRes.content) {
-          diaryData = await decryptPayload(diaryFileRes.content, secret);
-          diarySha = diaryFileRes.sha;
-        } else {
-          diaryData = createStarterDiaryData(displayName || userRecord.displayName);
         }
 
         session = {
           ...session,
           unlocked: true,
+          storageMode: 'local',
           email,
-          userHash,
+          userHash: v3Hash,
           password,
-          displayName: displayName || userRecord.displayName || 'Diary',
-          role: role || userRecord.role || 'member',
-          diaryFileName: targetDiaryFile,
-          token,
-          owner,
-          publicRepo,
-          privateRepo,
-          diarySha,
-          diaryData
+          displayName: localRecord.displayName || 'Guest',
+          role: 'public_user',
+          token: null,
+          diaryData: localDiaryData
         };
 
         document.getElementById('loginPassword').value = '';
@@ -1864,7 +1867,6 @@
       }
     });
 
-    // Emergency token recovery if Admin's GitHub token is ever revoked on GitHub
     async function recoverExpiredAdminToken() {
       const newToken = document.getElementById('emergencyTokenInput').value.trim();
       if (!newToken) return setStatus('loginStatus', 'error', 'Please paste a valid GitHub token.');
@@ -1896,9 +1898,9 @@
     }
 
     /********************************************************************
-     * 7. NEW MEMBER REGISTRATION (WITH ADMIN INVITE CODE)
+     * 8. PUBLIC VISITOR REGISTRATION (ZERO INVITE CODE, LOCAL ENCRYPTED)
      ********************************************************************/
-    document.getElementById('memberRegisterForm').addEventListener('submit', async (e) => {
+    document.getElementById('publicRegisterForm').addEventListener('submit', async (e) => {
       e.preventDefault();
       clearStatusMessages();
 
@@ -1906,7 +1908,6 @@
       const email = normalizeEmail(document.getElementById('regEmail').value);
       const password = document.getElementById('regPassword').value;
       const confirm = document.getElementById('regConfirm').value;
-      const inviteCode = document.getElementById('regInviteCode').value.trim();
 
       if (password !== confirm) {
         return setStatus('regStatus', 'error', 'Passwords do not match.');
@@ -1914,95 +1915,38 @@
 
       const btn = document.getElementById('regBtn');
       btn.disabled = true;
-      btn.textContent = 'Verifying Invite Code...';
+      btn.textContent = 'Creating Encrypted Diary...';
 
       try {
-        const freshAuth = await loadLatestAuthRegistry();
-        if (freshAuth && freshAuth.content && freshAuth.content.v === 2) {
-          session.authRegistry = freshAuth.content;
-          session.authSha = freshAuth.sha;
-        }
-
-        if (!session.authRegistry || !session.authRegistry.inviteLock) {
-          throw new Error('New member registration is currently disabled by the administrator.');
-        }
-
-        // 1. Decrypt inviteLock using the Invite Code
-        let invitePayload;
-        try {
-          invitePayload = await decryptPayload(session.authRegistry.inviteLock, `invite::${inviteCode}`);
-        } catch {
-          throw new Error('Invalid Invite Code. Please check with the administrator.');
-        }
-
-        const { token, owner, publicRepo, privateRepo } = invitePayload;
         const userHash = await hashEmailToId(email);
+        const cloudUsers = (session.authRegistry && session.authRegistry.users) || {};
+        const localUsers = getLocalUsersMap();
 
-        if (session.authRegistry.users[userHash]) {
-          throw new Error('An account with this email already exists. Please sign in instead.');
+        if (cloudUsers[userHash] || localUsers[userHash]) {
+          throw new Error('An account with this email already exists. Please sign in.');
         }
 
-        const memberDiaryFile = `diary_${userHash.slice(0, 12)}.json`;
         const secret = compositeSecret(email, password);
-
-        // 2. Create encrypted user lock
-        const memberLock = await encryptPayload({
-          token,
-          owner,
-          publicRepo,
-          privateRepo,
-          role: 'member',
-          displayName,
-          diaryFile: memberDiaryFile
-        }, secret);
-
-        // 3. Create member's isolated encrypted diary file in diary-vault
         const starterDiary = createStarterDiaryData(displayName);
         const encryptedDiary = await encryptPayload(starterDiary, secret);
 
-        const diarySha = await githubPutFile(
-          owner,
-          privateRepo,
-          memberDiaryFile,
-          encryptedDiary,
-          `Create encrypted diary for member ${userHash.slice(0, 8)}`,
-          token
-        );
-
-        // 4. Save member record into auth.json
-        session.authRegistry.users[userHash] = {
-          role: 'member',
+        localUsers[userHash] = {
           displayName,
-          diaryFile: memberDiaryFile,
           createdAt: new Date().toISOString().slice(0, 10),
-          lock: memberLock
+          encryptedDiary
         };
-
-        const authSha = await githubPutFile(
-          owner,
-          publicRepo,
-          DEFAULT_CONFIG.authFile,
-          session.authRegistry,
-          `Register member ${userHash.slice(0, 8)}`,
-          token,
-          session.authSha
-        );
+        saveLocalUsersMap(localUsers);
 
         session = {
           ...session,
           unlocked: true,
+          storageMode: 'local',
           email,
           userHash,
           password,
           displayName,
-          role: 'member',
-          diaryFileName: memberDiaryFile,
-          token,
-          owner,
-          publicRepo,
-          privateRepo,
-          diarySha,
-          authSha,
+          role: 'public_user',
+          token: null,
           diaryData: starterDiary
         };
 
@@ -2012,83 +1956,103 @@
         setStatus('regStatus', 'error', err.message);
       } finally {
         btn.disabled = false;
-        btn.textContent = 'Create Encrypted Diary';
+        btn.textContent = 'Create My Diary';
       }
     });
 
     /********************************************************************
-     * 8. CHANGE PASSWORD (PRE-LOGIN & IN-APP FOR ANY USER)
+     * 9. CHANGE PASSWORD (PRE-LOGIN & IN-APP FOR BOTH MODES)
      ********************************************************************/
     async function executeUserPasswordRotation(emailInput, oldPassword, newPassword) {
       const email = normalizeEmail(emailInput);
-      const userHash = await hashEmailToId(email);
+      const oldSecret = compositeSecret(email, oldPassword);
+      const newSecret = compositeSecret(email, newPassword);
+      const v3Hash = await hashEmailToId(email);
+      const v2Hash = await computeLegacyV2Hash(email);
 
+      // Case A: Admin / GitHub Cloud Account
       const freshAuth = await loadLatestAuthRegistry();
-      if (freshAuth && freshAuth.content && freshAuth.content.v === 2) {
+      if (freshAuth && freshAuth.content && freshAuth.content.users) {
         session.authRegistry = freshAuth.content;
         session.authSha = freshAuth.sha;
       }
 
-      const userRecord = session.authRegistry && session.authRegistry.users
-        ? session.authRegistry.users[userHash]
-        : null;
+      const cloudUsers = (session.authRegistry && session.authRegistry.users) || {};
+      const cloudRecord = cloudUsers[v3Hash] || cloudUsers[v2Hash];
+      const activeCloudHash = cloudUsers[v3Hash] ? v3Hash : v2Hash;
 
-      if (!userRecord) {
+      if (cloudRecord) {
+        let unlockedLock;
+        try {
+          unlockedLock = await decryptPayload(cloudRecord.lock, oldSecret);
+        } catch {
+          throw new Error('Current password is incorrect.');
+        }
+
+        const { token, owner, publicRepo, privateRepo, diaryFile } = unlockedLock;
+        const targetDiaryFile = diaryFile || cloudRecord.diaryFile || DEFAULT_CONFIG.adminDiaryFile;
+
+        const diaryFileRes = await githubGetFile(owner, privateRepo, targetDiaryFile, token);
+        let diaryData = session.diaryData;
+        let diarySha = null;
+
+        if (diaryFileRes && diaryFileRes.content) {
+          diaryData = await decryptPayload(diaryFileRes.content, oldSecret);
+          diarySha = diaryFileRes.sha;
+        }
+
+        const newEncryptedDiary = await encryptPayload(diaryData, newSecret);
+        const updatedDiarySha = await githubPutFile(
+          owner,
+          privateRepo,
+          targetDiaryFile,
+          newEncryptedDiary,
+          'Rotate Admin password',
+          token,
+          diarySha
+        );
+
+        const newEncryptedLock = await encryptPayload(unlockedLock, newSecret);
+        session.authRegistry.users[activeCloudHash].lock = newEncryptedLock;
+
+        const updatedAuthSha = await githubPutFile(
+          owner,
+          publicRepo,
+          DEFAULT_CONFIG.authFile,
+          session.authRegistry,
+          'Update Admin lock',
+          token,
+          session.authSha
+        );
+
+        session.authSha = updatedAuthSha;
+        if (session.unlocked && session.storageMode === 'github') {
+          session.password = newPassword;
+          session.diarySha = updatedDiarySha;
+        }
+        return;
+      }
+
+      // Case B: Public Local Browser Account
+      const localUsers = getLocalUsersMap();
+      const localRecord = localUsers[v3Hash];
+      if (!localRecord) {
         throw new Error('Account not found or current password is incorrect.');
       }
 
-      const oldSecret = compositeSecret(email, oldPassword);
-      let unlockedLock;
+      let diaryData;
       try {
-        unlockedLock = await decryptPayload(userRecord.lock, oldSecret);
+        diaryData = await decryptPayload(localRecord.encryptedDiary, oldSecret);
       } catch {
         throw new Error('Current password is incorrect.');
       }
 
-      const { token, owner, publicRepo, privateRepo, diaryFile } = unlockedLock;
-      const targetDiaryFile = diaryFile || userRecord.diaryFile || DEFAULT_CONFIG.adminDiaryFile;
+      localRecord.encryptedDiary = await encryptPayload(diaryData, newSecret);
+      localUsers[v3Hash] = localRecord;
+      saveLocalUsersMap(localUsers);
 
-      // Fetch and decrypt the user's diary file using oldSecret
-      const diaryFileRes = await githubGetFile(owner, privateRepo, targetDiaryFile, token);
-      let diaryData = session.diaryData;
-      let diarySha = null;
-
-      if (diaryFileRes && diaryFileRes.content) {
-        diaryData = await decryptPayload(diaryFileRes.content, oldSecret);
-        diarySha = diaryFileRes.sha;
-      }
-
-      // Re-encrypt diary and user lock with newSecret
-      const newSecret = compositeSecret(email, newPassword);
-      const newEncryptedDiary = await encryptPayload(diaryData, newSecret);
-
-      const updatedDiarySha = await githubPutFile(
-        owner,
-        privateRepo,
-        targetDiaryFile,
-        newEncryptedDiary,
-        `Rotate password for ${userHash.slice(0, 8)}`,
-        token,
-        diarySha
-      );
-
-      const newEncryptedLock = await encryptPayload(unlockedLock, newSecret);
-      session.authRegistry.users[userHash].lock = newEncryptedLock;
-
-      const updatedAuthSha = await githubPutFile(
-        owner,
-        publicRepo,
-        DEFAULT_CONFIG.authFile,
-        session.authRegistry,
-        `Update user lock for ${userHash.slice(0, 8)}`,
-        token,
-        session.authSha
-      );
-
-      session.authSha = updatedAuthSha;
-      if (session.unlocked && session.userHash === userHash) {
+      if (session.unlocked && session.storageMode === 'local' && session.userHash === v3Hash) {
         session.password = newPassword;
-        session.diarySha = updatedDiarySha;
       }
     }
 
@@ -2158,12 +2122,10 @@
     });
 
     /********************************************************************
-     * 9. ADMIN-ONLY PANEL (INVITE CODE, TOKEN ROTATION, MEMBER LIST)
+     * 10. ADMIN-ONLY TOKEN ROTATION MODAL
      ********************************************************************/
     function openAdminModal() {
-      if (session.role !== 'admin') return;
-      renderAdminMembersList();
-      document.getElementById('adminInviteInput').value = '';
+      if (session.role !== 'admin' || session.storageMode !== 'github') return;
       document.getElementById('adminNewTokenInput').value = '';
       document.getElementById('adminModal').classList.add('open');
     }
@@ -2172,62 +2134,8 @@
       document.getElementById('adminModal').classList.remove('open');
     }
 
-    function renderAdminMembersList() {
-      const list = document.getElementById('adminMembersList');
-      list.innerHTML = '';
-      const users = (session.authRegistry && session.authRegistry.users) || {};
-
-      Object.entries(users).forEach(([hash, u]) => {
-        const li = document.createElement('li');
-        li.className = 'member-item';
-        const isSelf = hash === session.userHash;
-        li.innerHTML = `
-          <div>
-            <strong>${escapeHtml(u.displayName || 'User')}</strong>
-            <span class="role-pill">${u.role === 'admin' ? 'Admin' : 'Member'}</span>
-            <div style="font-size: 0.75rem; color: var(--text-muted);" class="mono">File: ${escapeHtml(u.diaryFile)} ${u.createdAt ? '• Joined ' + escapeHtml(u.createdAt) : ''}</div>
-          </div>
-          ${!isSelf ? `<button class="btn btn-danger btn-sm" onclick="adminRemoveMember('${hash}')">Remove</button>` : '<span style="font-size: 0.78rem; color: var(--text-muted);">You</span>'}
-        `;
-        list.appendChild(li);
-      });
-    }
-
-    async function adminUpdateInviteCode() {
-      if (session.role !== 'admin') return;
-      const newCode = document.getElementById('adminInviteInput').value.trim();
-
-      try {
-        if (newCode) {
-          session.authRegistry.inviteLock = await encryptPayload({
-            token: session.token,
-            owner: session.owner,
-            publicRepo: session.publicRepo,
-            privateRepo: session.privateRepo
-          }, `invite::${newCode}`);
-        } else {
-          session.authRegistry.inviteLock = null;
-        }
-
-        session.authSha = await githubPutFile(
-          session.owner,
-          session.publicRepo,
-          DEFAULT_CONFIG.authFile,
-          session.authRegistry,
-          newCode ? 'Update member invite code' : 'Disable member invite code',
-          session.token,
-          session.authSha
-        );
-
-        document.getElementById('adminInviteInput').value = '';
-        showToast(newCode ? 'Invite code updated!' : 'New member signups disabled.', 'success');
-      } catch (err) {
-        showToast(`Failed: ${err.message}`, 'error');
-      }
-    }
-
     async function adminUpdateToken() {
-      if (session.role !== 'admin') return;
+      if (session.role !== 'admin' || session.storageMode !== 'github') return;
       const newToken = document.getElementById('adminNewTokenInput').value.trim();
       if (!newToken) return showToast('Paste a valid GitHub token first.', 'error');
 
@@ -2257,38 +2165,15 @@
 
         session.token = newToken;
         document.getElementById('adminNewTokenInput').value = '';
+        closeAdminModal();
         showToast('GitHub token updated and encrypted!', 'success');
       } catch (err) {
         showToast(`Token update failed: ${err.message}`, 'error');
       }
     }
 
-    async function adminRemoveMember(targetHash) {
-      if (session.role !== 'admin' || targetHash === session.userHash) return;
-      const u = session.authRegistry.users[targetHash];
-      if (!u) return;
-      if (!confirm(`Remove member "${u.displayName}" from logging in?`)) return;
-
-      try {
-        delete session.authRegistry.users[targetHash];
-        session.authSha = await githubPutFile(
-          session.owner,
-          session.publicRepo,
-          DEFAULT_CONFIG.authFile,
-          session.authRegistry,
-          `Remove member ${targetHash.slice(0, 8)}`,
-          session.token,
-          session.authSha
-        );
-        renderAdminMembersList();
-        showToast(`Removed ${u.displayName}`, 'success');
-      } catch (err) {
-        showToast(`Failed: ${err.message}`, 'error');
-      }
-    }
-
     /********************************************************************
-     * 10. 5-MINUTE INACTIVITY AUTO-LOCK
+     * 11. 5-MINUTE INACTIVITY AUTO-LOCK
      ********************************************************************/
     function resetActivityTimer() {
       if (!session.unlocked) return;
@@ -2351,7 +2236,7 @@
     }
 
     /********************************************************************
-     * 11. RENDER & MANAGE MONTHS -> DATE & DAY SUBSECTIONS
+     * 12. RENDER & MANAGE MONTHS -> DATE & DAY SUBSECTIONS
      ********************************************************************/
     function enterUnlockedApp() {
       document.getElementById('authWrapper').style.display = 'none';
@@ -2360,10 +2245,13 @@
       const initial = (session.displayName || 'P').charAt(0).toUpperCase();
       document.getElementById('brandAvatar').textContent = initial;
       document.getElementById('bannerWelcome').textContent = `${session.displayName}'s Journal`;
-      document.getElementById('userBadge').textContent = `${session.role === 'admin' ? 'Admin' : 'Member'} • AES-256 Encrypted`;
 
-      // Strictly show Admin button ONLY if logged-in user is Admin
-      document.getElementById('adminSettingsBtn').style.display = session.role === 'admin' ? 'inline-flex' : 'none';
+      const isAdminCloud = session.role === 'admin' && session.storageMode === 'github';
+      document.getElementById('userBadge').textContent = isAdminCloud
+        ? 'Cloud Vault • AES-256 Encrypted'
+        : 'Local Device Vault • AES-256 Encrypted';
+
+      document.getElementById('adminSettingsBtn').style.display = isAdminCloud ? 'inline-flex' : 'none';
 
       startInactivityWatcher();
       sortDiaryStructure();
@@ -2382,7 +2270,7 @@
       });
     }
 
-    async function syncDiaryToGitHub(commitMsg = 'Update encrypted diary') {
+    async function saveDiaryChanges(commitMsg = 'Update encrypted diary') {
       const pill = document.getElementById('syncIndicator');
       const text = document.getElementById('syncText');
       pill.classList.add('syncing');
@@ -2392,15 +2280,25 @@
         sortDiaryStructure();
         const secret = compositeSecret(session.email, session.password);
         const encryptedDiary = await encryptPayload(session.diaryData, secret);
-        session.diarySha = await githubPutFile(
-          session.owner,
-          session.privateRepo,
-          session.diaryFileName,
-          encryptedDiary,
-          commitMsg,
-          session.token,
-          session.diarySha
-        );
+
+        if (session.storageMode === 'github') {
+          session.diarySha = await githubPutFile(
+            session.owner,
+            session.privateRepo,
+            session.diaryFileName,
+            encryptedDiary,
+            commitMsg,
+            session.token,
+            session.diarySha
+          );
+        } else {
+          const localUsers = getLocalUsersMap();
+          if (localUsers[session.userHash]) {
+            localUsers[session.userHash].encryptedDiary = encryptedDiary;
+            saveLocalUsersMap(localUsers);
+          }
+        }
+
         pill.classList.remove('syncing');
         text.textContent = 'Saved';
         showToast('Changes saved', 'success');
@@ -2524,7 +2422,7 @@
     }
 
     /********************************************************************
-     * 12. ADD / EDIT / DELETE MONTH & DATE ENTRIES
+     * 13. ADD / EDIT / DELETE MONTH & DATE ENTRIES
      ********************************************************************/
     function openMonthModal(monthId = null) {
       const modal = document.getElementById('monthModal');
@@ -2581,7 +2479,7 @@
       closeMonthModal();
       sortDiaryStructure();
       renderDiary();
-      await syncDiaryToGitHub(`Save month: ${label}`);
+      await saveDiaryChanges(`Save month: ${label}`);
     });
 
     async function deleteMonth(monthId) {
@@ -2591,7 +2489,7 @@
 
       session.diaryData.months = session.diaryData.months.filter(x => x.id !== monthId);
       renderDiary();
-      await syncDiaryToGitHub(`Delete month: ${m.label}`);
+      await saveDiaryChanges(`Delete month: ${m.label}`);
     }
 
     function formatTimeNow() {
@@ -2709,7 +2607,7 @@
       closeEntryModal();
       sortDiaryStructure();
       renderDiary();
-      await syncDiaryToGitHub(`Save entry: ${dateLabel}`);
+      await saveDiaryChanges(`Save entry: ${dateLabel}`);
     });
 
     async function deleteEntry(monthId, entryId) {
@@ -2722,7 +2620,7 @@
 
       month.entries = month.entries.filter(e => e.id !== entryId);
       renderDiary();
-      await syncDiaryToGitHub(`Delete entry: ${entry.dateLabel}`);
+      await saveDiaryChanges(`Delete entry: ${entry.dateLabel}`);
     }
 
     function showToast(message, type = 'success') {
