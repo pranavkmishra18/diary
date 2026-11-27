@@ -3125,9 +3125,9 @@
           if (session.storageMode === 'github' && removedGithubPhotoPaths.length > 0) {
             const pathsToClean = [...removedGithubPhotoPaths];
             removedGithubPhotoPaths = [];
-            pathsToClean.forEach(path => {
-              githubDeleteFile(session.owner, session.privateRepo, path, `Remove photo ${path}`, session.token);
-            });
+            for (const path of pathsToClean) {
+           await githubDeleteFile(session.owner, session.privateRepo, path, `Remove photo ${path}`, session.token);
+         }
           }
           closePostModal();
           sortPosts();
@@ -3153,10 +3153,10 @@
       const saved = await saveDiaryChanges(`Delete entry: ${post.heading}`);
 
       if (saved && session.storageMode === 'github' && githubPhotosToDelete.length > 0) {
-        githubPhotosToDelete.forEach(p => {
-          session.mediaCache.delete(p.id);
-          githubDeleteFile(session.owner, session.privateRepo, p.path, `Delete photo ${p.id}`, session.token);
-        });
+        for (const p of githubPhotosToDelete) {
+       session.mediaCache.delete(p.id);
+       await githubDeleteFile(session.owner, session.privateRepo, p.path, `Delete photo ${p.id}`, session.token);
+     }
       }
     }
 
