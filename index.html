@@ -3,52 +3,55 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Personal Diary</title>
+  <title>Pranav Diary</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Lora:ital,wght@0,500;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Lora:ital,wght@0,400;0,500;0,600;1,400&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,400;1,500&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg-page: #f3f4f6;
-      --bg-surface: #ffffff;
-      --bg-subtle: #f9fafb;
-      --bg-hover: #f1f5f9;
+      /* Literary Parchment Palette */
+      --bg-parchment: #f5efe4;
+      --bg-paper: #fdfaf4;
+      --bg-paper-soft: #f8f3e9;
+      --bg-hover: #efe7d8;
 
-      --text-ink: #111827;
-      --text-body: #1f2937;
-      --text-secondary: #4b5563;
-      --text-muted: #6b7280;
+      --ink-espresso: #261c17;
+      --ink-body: #3a2d26;
+      --ink-secondary: #6d5c52;
+      --ink-muted: #938176;
 
-      --accent-navy: #1e3a8a;
-      --accent-navy-hover: #172554;
-      --accent-navy-light: #eff6ff;
-      --accent-navy-border: #bfdbfe;
+      --accent-burgundy: #7a2832;
+      --accent-burgundy-hover: #5c1c24;
+      --accent-burgundy-soft: #f6eaec;
+      --accent-burgundy-border: #dfc0c5;
+      --accent-bronze: #9c6f44;
 
-      --border-color: #e5e7eb;
-      --border-strong: #d1d5db;
+      --border-light: #e6dccb;
+      --border-strong: #d3c4ac;
 
-      --danger: #b91c1c;
-      --danger-bg: #fef2f2;
-      --danger-border: #fecaca;
+      --danger: #9f2424;
+      --danger-bg: #fdf1f1;
+      --danger-border: #e9c2c2;
 
-      --success: #15803d;
-      --success-bg: #f0fdf4;
-      --success-border: #bbf7d0;
+      --success: #2c5e3b;
+      --success-bg: #eff7f1;
+      --success-border: #c1dec9;
 
-      --warning: #b45309;
-      --warning-bg: #fffbeb;
-      --warning-border: #fde68a;
+      --warning: #925614;
+      --warning-bg: #fbf4e6;
+      --warning-border: #e7cfa3;
 
-      --radius-lg: 12px;
-      --radius-md: 8px;
-      --radius-sm: 6px;
+      --radius-lg: 10px;
+      --radius-md: 7px;
+      --radius-sm: 5px;
 
-      --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-      --shadow-card: 0 1px 3px 0 rgba(0, 0, 0, 0.07), 0 1px 2px -1px rgba(0, 0, 0, 0.05);
-      --shadow-modal: 0 20px 25px -5px rgba(0, 0, 0, 0.12), 0 8px 10px -6px rgba(0, 0, 0, 0.08);
+      --shadow-sm: 0 1px 2px rgba(38, 28, 23, 0.05);
+      --shadow-card: 0 4px 20px rgba(38, 28, 23, 0.06);
+      --shadow-modal: 0 24px 48px rgba(38, 28, 23, 0.16), 0 8px 16px rgba(38, 28, 23, 0.08);
 
+      --font-display: 'Playfair Display', Georgia, Cambria, "Times New Roman", serif;
+      --font-serif: 'Lora', Georgia, Cambria, "Times New Roman", serif;
       --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-      --font-serif: 'Lora', Georgia, Cambria, "Times New Roman", Times, serif;
       --font-mono: 'JetBrains Mono', monospace;
     }
 
@@ -58,122 +61,133 @@
       padding: 0;
     }
 
+    html {
+      scroll-behavior: smooth;
+    }
+
     body {
-      background-color: var(--bg-page);
-      color: var(--text-ink);
+      background-color: var(--bg-parchment);
+      color: var(--ink-espresso);
       font-family: var(--font-sans);
       min-height: 100vh;
-      line-height: 1.6;
+      line-height: 1.65;
       -webkit-font-smoothing: antialiased;
     }
 
-    .serif-heading {
-      font-family: var(--font-serif);
+    .display-heading {
+      font-family: var(--font-display);
       font-weight: 600;
-      letter-spacing: -0.01em;
+      letter-spacing: -0.015em;
     }
 
     .mono {
       font-family: var(--font-mono);
     }
 
-    /* ================= 1. AUTH / LOGIN / PUBLIC REGISTER SCREENS ================= */
+    /* ================= 1. AUTH / LOCK / REGISTRATION SCREENS ================= */
     .auth-wrapper {
       min-height: 100vh;
       display: flex;
       align-items: center;
       justify-content: center;
-      padding: 24px;
-      background: linear-gradient(180deg, #f9fafb 0%, #eef2f6 100%);
+      padding: 28px 20px;
+      background:
+        radial-gradient(circle at top, rgba(156, 111, 68, 0.09), transparent 55%),
+        linear-gradient(180deg, #f8f3ea 0%, #f1e8d9 100%);
     }
 
     .auth-card {
       width: 100%;
-      max-width: 450px;
-      background: var(--bg-surface);
-      border: 1px solid var(--border-color);
-      border-top: 4px solid var(--accent-navy);
+      max-width: 440px;
+      background: var(--bg-paper);
+      border: 1px solid var(--border-light);
+      border-top: 3px solid var(--accent-burgundy);
       border-radius: var(--radius-lg);
-      padding: 36px 32px;
-      box-shadow: var(--shadow-modal);
+      padding: 40px 36px 34px;
+      box-shadow: var(--shadow-card);
     }
 
-    .diary-tag {
+    .auth-kicker {
       display: inline-flex;
       align-items: center;
-      gap: 6px;
-      padding: 4px 10px;
-      border-radius: 999px;
-      background: var(--accent-navy-light);
-      border: 1px solid var(--accent-navy-border);
-      color: var(--accent-navy);
-      font-size: 0.75rem;
+      gap: 7px;
+      font-size: 0.72rem;
       font-weight: 600;
-      margin-bottom: 14px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--accent-bronze);
+      margin-bottom: 12px;
     }
 
     .auth-title {
-      font-size: 1.75rem;
-      color: var(--text-ink);
-      margin-bottom: 6px;
+      font-size: 2rem;
+      line-height: 1.2;
+      color: var(--ink-espresso);
+      margin-bottom: 8px;
     }
 
     .auth-subtitle {
-      color: var(--text-secondary);
-      font-size: 0.9rem;
-      margin-bottom: 24px;
+      font-family: var(--font-serif);
+      color: var(--ink-secondary);
+      font-size: 0.94rem;
+      margin-bottom: 26px;
+      line-height: 1.6;
     }
 
     .form-group {
-      margin-bottom: 15px;
+      margin-bottom: 16px;
     }
 
     .form-label {
       display: block;
-      font-size: 0.8rem;
+      font-size: 0.78rem;
       font-weight: 600;
-      color: var(--text-body);
+      letter-spacing: 0.03em;
+      color: var(--ink-secondary);
       margin-bottom: 6px;
     }
 
-    .form-input, .form-textarea, .form-select {
+    .form-input, .form-textarea {
       width: 100%;
-      background: var(--bg-surface);
+      background: #ffffff;
       border: 1px solid var(--border-strong);
       border-radius: var(--radius-md);
       padding: 11px 14px;
-      color: var(--text-ink);
+      color: var(--ink-espresso);
       font-family: var(--font-sans);
       font-size: 0.94rem;
-      transition: border-color 0.15s, box-shadow 0.15s;
+      transition: border-color 0.18s ease, box-shadow 0.18s ease, background-color 0.18s ease;
       outline: none;
     }
 
-    .form-input:focus, .form-textarea:focus, .form-select:focus {
-      border-color: var(--accent-navy);
-      box-shadow: 0 0 0 3px rgba(30, 58, 138, 0.12);
+    .form-input::placeholder, .form-textarea::placeholder {
+      color: var(--ink-muted);
     }
 
-    .form-textarea {
-      min-height: 220px;
-      resize: vertical;
-      line-height: 1.75;
-      font-size: 1rem;
+    .form-input:focus, .form-textarea:focus {
+      border-color: var(--accent-burgundy);
+      box-shadow: 0 0 0 3px rgba(122, 40, 50, 0.1);
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
     }
 
     .btn {
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      gap: 8px;
+      gap: 7px;
       font-family: var(--font-sans);
-      font-size: 0.9rem;
-      font-weight: 600;
-      padding: 11px 18px;
+      font-size: 0.88rem;
+      font-weight: 500;
+      padding: 10px 18px;
       border-radius: var(--radius-md);
       border: 1px solid transparent;
       cursor: pointer;
-      transition: all 0.15s ease;
+      transition: all 0.16s ease;
       text-decoration: none;
       white-space: nowrap;
     }
@@ -184,33 +198,49 @@
     }
 
     .btn-primary {
-      background: var(--accent-navy);
-      color: #ffffff;
+      background: var(--accent-burgundy);
+      color: #fdfaf4;
+      letter-spacing: 0.01em;
     }
 
     .btn-primary:hover:not(:disabled) {
-      background: var(--accent-navy-hover);
+      background: var(--accent-burgundy-hover);
     }
 
     .btn-secondary {
-      background: var(--bg-surface);
-      color: var(--text-body);
+      background: var(--bg-paper);
+      color: var(--ink-body);
       border-color: var(--border-strong);
     }
 
     .btn-secondary:hover:not(:disabled) {
       background: var(--bg-hover);
-      border-color: #9ca3af;
+      border-color: var(--accent-bronze);
     }
 
-    .btn-danger {
-      background: var(--danger-bg);
-      color: var(--danger);
-      border-color: var(--danger-border);
+    .btn-ghost {
+      background: transparent;
+      color: var(--ink-secondary);
+      border-color: transparent;
+      padding: 7px 11px;
+      font-size: 0.82rem;
     }
 
-    .btn-danger:hover:not(:disabled) {
-      background: #fee2e2;
+    .btn-ghost:hover:not(:disabled) {
+      background: var(--bg-hover);
+      color: var(--ink-espresso);
+    }
+
+    .btn-danger-ghost {
+      background: transparent;
+      color: var(--accent-burgundy);
+      border: 1px solid var(--accent-burgundy-border);
+      padding: 6px 12px;
+      font-size: 0.8rem;
+    }
+
+    .btn-danger-ghost:hover:not(:disabled) {
+      background: var(--accent-burgundy-soft);
     }
 
     .btn-sm {
@@ -220,12 +250,13 @@
 
     .btn-full {
       width: 100%;
+      padding: 12px 18px;
     }
 
     .auth-footer-actions {
-      margin-top: 20px;
+      margin-top: 22px;
       padding-top: 16px;
-      border-top: 1px solid var(--border-color);
+      border-top: 1px solid var(--border-light);
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -236,15 +267,15 @@
     .link-btn {
       background: none;
       border: none;
-      color: var(--accent-navy);
+      color: var(--accent-burgundy);
       cursor: pointer;
       font-family: var(--font-sans);
       font-size: 0.84rem;
-      font-weight: 600;
+      font-weight: 500;
       display: inline-flex;
       align-items: center;
-      gap: 5px;
-      padding: 4px 0;
+      gap: 4px;
+      padding: 3px 0;
     }
 
     .link-btn:hover {
@@ -252,611 +283,22 @@
     }
 
     .privacy-note {
-      background: var(--bg-subtle);
-      border: 1px solid var(--border-color);
-      border-radius: var(--radius-md);
-      padding: 10px 12px;
-      font-size: 0.8rem;
-      color: var(--text-secondary);
-      margin-bottom: 16px;
-      line-height: 1.5;
-    }
-
-    @keyframes shake {
-      0%, 100% { transform: translateX(0); }
-      20%, 60% { transform: translateX(-6px); }
-      40%, 80% { transform: translateX(6px); }
-    }
-    .shake {
-      animation: shake 0.35s ease-in-out;
-      border-top-color: var(--danger) !important;
-    }
-
-    /* ================= 2. MAIN DIARY APPLICATION ================= */
-    .app-container {
-      display: none;
-      min-height: 100vh;
-      flex-direction: column;
-    }
-
-    .topbar {
-      position: sticky;
-      top: 0;
-      z-index: 40;
-      background: var(--bg-surface);
-      border-bottom: 1px solid var(--border-color);
-      padding: 12px 28px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 16px;
-      flex-wrap: wrap;
-      box-shadow: var(--shadow-sm);
-    }
-
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-
-    .brand-icon {
-      width: 36px;
-      height: 36px;
-      border-radius: 8px;
-      background: var(--accent-navy);
-      color: #ffffff;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-family: var(--font-serif);
-      font-weight: 600;
-      font-size: 1.1rem;
-    }
-
-    .brand-text h1 {
-      font-size: 1.25rem;
-      color: var(--text-ink);
-      line-height: 1.2;
-    }
-
-    .brand-text span {
-      font-size: 0.75rem;
-      color: var(--text-muted);
-    }
-
-    .topbar-controls {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      flex-wrap: wrap;
-    }
-
-    .search-box {
-      position: relative;
-      width: 220px;
-    }
-
-    .search-box input {
-      width: 100%;
-      background: var(--bg-subtle);
-      border: 1px solid var(--border-strong);
-      border-radius: var(--radius-md);
-      padding: 7px 12px 7px 32px;
-      color: var(--text-ink);
-      font-size: 0.85rem;
-      outline: none;
-      transition: all 0.15s;
-    }
-
-    .search-box input:focus {
-      background: var(--bg-surface);
-      border-color: var(--accent-navy);
-      width: 250px;
-    }
-
-    .search-box svg {
-      position: absolute;
-      left: 10px;
-      top: 50%;
-      transform: translateY(-50%);
-      color: var(--text-muted);
-      width: 15px;
-      height: 15px;
-    }
-
-    .status-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      font-size: 0.78rem;
-      font-weight: 500;
-      padding: 6px 11px;
-      border-radius: var(--radius-md);
-      background: var(--success-bg);
-      border: 1px solid var(--success-border);
-      color: var(--success);
-    }
-
-    .status-badge.syncing {
-      background: var(--accent-navy-light);
-      border-color: var(--accent-navy-border);
-      color: var(--accent-navy);
-    }
-
-    .timer-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      padding: 6px 11px;
-      border-radius: var(--radius-md);
-      background: var(--bg-subtle);
-      border: 1px solid var(--border-color);
-      font-size: 0.78rem;
-      color: var(--text-secondary);
-      font-weight: 500;
-    }
-
-    .timer-badge.warning {
-      background: var(--warning-bg);
-      border-color: var(--warning-border);
-      color: var(--warning);
-    }
-
-    .workspace {
-      max-width: 1180px;
-      width: 100%;
-      margin: 0 auto;
-      padding: 28px 20px 80px;
-      display: grid;
-      grid-template-columns: 250px 1fr;
-      gap: 28px;
-      align-items: start;
-    }
-
-    .sidebar {
-      position: sticky;
-      top: 80px;
-      background: var(--bg-surface);
-      border: 1px solid var(--border-color);
-      border-radius: var(--radius-lg);
-      padding: 18px;
-      box-shadow: var(--shadow-card);
-      max-height: calc(100vh - 104px);
-      overflow-y: auto;
-    }
-
-    .sidebar-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-bottom: 12px;
-      padding-bottom: 10px;
-      border-bottom: 1px solid var(--border-color);
-    }
-
-    .sidebar-title {
-      font-size: 0.75rem;
-      text-transform: uppercase;
-      letter-spacing: 0.06em;
-      color: var(--text-muted);
-      font-weight: 700;
-    }
-
-    .month-nav-list {
-      list-style: none;
-      display: flex;
-      flex-direction: column;
-      gap: 4px;
-    }
-
-    .month-nav-btn {
-      width: 100%;
-      text-align: left;
-      background: transparent;
-      border: none;
-      color: var(--text-ink);
-      padding: 8px 10px;
+      background: var(--bg-paper-soft);
+      border: 1px solid var(--border-light);
+      border-left: 3px solid var(--accent-bronze);
       border-radius: var(--radius-sm);
-      font-family: var(--font-sans);
-      font-size: 0.88rem;
-      font-weight: 600;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      cursor: pointer;
-      transition: background 0.15s;
-    }
-
-    .month-nav-btn:hover {
-      background: var(--bg-hover);
-      color: var(--accent-navy);
-    }
-
-    .month-count-badge {
-      font-size: 0.72rem;
-      padding: 1px 7px;
-      border-radius: 999px;
-      background: var(--bg-subtle);
-      border: 1px solid var(--border-color);
-      color: var(--text-secondary);
-    }
-
-    .day-sublist {
-      list-style: none;
-      padding-left: 12px;
-      margin: 2px 0 8px 10px;
-      border-left: 2px solid var(--border-color);
-      display: flex;
-      flex-direction: column;
-      gap: 2px;
-    }
-
-    .day-nav-link {
+      padding: 11px 13px;
       font-size: 0.8rem;
-      color: var(--text-secondary);
-      text-decoration: none;
-      padding: 4px 8px;
-      border-radius: 4px;
-      display: block;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
+      color: var(--ink-secondary);
+      margin-bottom: 18px;
+      line-height: 1.55;
     }
-
-    .day-nav-link:hover {
-      color: var(--accent-navy);
-      background: var(--accent-navy-light);
-    }
-
-    .feed {
-      display: flex;
-      flex-direction: column;
-      gap: 24px;
-    }
-
-    .action-banner {
-      background: var(--bg-surface);
-      border: 1px solid var(--border-color);
-      border-left: 4px solid var(--accent-navy);
-      border-radius: var(--radius-lg);
-      padding: 20px 24px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 16px;
-      flex-wrap: wrap;
-      box-shadow: var(--shadow-card);
-    }
-
-    .action-banner-left h2 {
-      font-size: 1.35rem;
-      color: var(--text-ink);
-      margin-bottom: 2px;
-    }
-
-    .action-banner-left p {
-      color: var(--text-secondary);
-      font-size: 0.87rem;
-    }
-
-    .action-banner-buttons {
-      display: flex;
-      gap: 10px;
-      flex-wrap: wrap;
-    }
-
-    .month-section {
-      background: var(--bg-surface);
-      border: 1px solid var(--border-color);
-      border-radius: var(--radius-lg);
-      overflow: hidden;
-      box-shadow: var(--shadow-card);
-    }
-
-    .month-header {
-      padding: 16px 24px;
-      background: var(--bg-subtle);
-      border-bottom: 1px solid var(--border-color);
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 16px;
-      cursor: pointer;
-      user-select: none;
-    }
-
-    .month-header:hover {
-      background: #f1f5f9;
-    }
-
-    .month-header-left {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-
-    .month-chevron {
-      width: 24px;
-      height: 24px;
-      border-radius: 6px;
-      background: var(--bg-surface);
-      border: 1px solid var(--border-color);
-      color: var(--text-secondary);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 0.7rem;
-      transition: transform 0.2s ease;
-    }
-
-    .month-section.collapsed .month-chevron {
-      transform: rotate(-90deg);
-    }
-
-    .month-section.collapsed .month-body {
-      display: none;
-    }
-
-    .month-title {
-      font-size: 1.4rem;
-      color: var(--text-ink);
-    }
-
-    .month-meta {
-      font-size: 0.76rem;
-      font-weight: 500;
-      color: var(--text-secondary);
-      padding: 2px 10px;
-      border-radius: 999px;
-      background: var(--bg-surface);
-      border: 1px solid var(--border-color);
-    }
-
-    .month-header-actions {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .month-body {
-      padding: 24px;
-      display: flex;
-      flex-direction: column;
-      gap: 20px;
-      background: var(--bg-surface);
-    }
-
-    .day-card {
-      background: var(--bg-surface);
-      border: 1px solid var(--border-color);
-      border-left: 3px solid var(--accent-navy);
-      border-radius: var(--radius-md);
-      padding: 22px 24px;
-      transition: border-color 0.15s, box-shadow 0.15s;
-    }
-
-    .day-card:hover {
-      border-color: #cbd5e1;
-      border-left-color: var(--accent-navy);
-      box-shadow: var(--shadow-card);
-    }
-
-    .day-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 12px;
-      margin-bottom: 12px;
-      padding-bottom: 10px;
-      border-bottom: 1px solid #f1f5f9;
-      flex-wrap: wrap;
-    }
-
-    .day-heading-group {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      flex-wrap: wrap;
-    }
-
-    .day-date-badge {
-      font-size: 1.05rem;
-      font-weight: 700;
-      color: var(--accent-navy);
-    }
-
-    .day-time-badge {
-      font-size: 0.76rem;
-      color: var(--text-muted);
-      background: var(--bg-subtle);
-      border: 1px solid var(--border-color);
-      padding: 2px 8px;
-      border-radius: 4px;
-    }
-
-    .day-mood-badge {
-      font-size: 0.76rem;
-      font-weight: 500;
-      padding: 2px 10px;
-      border-radius: 999px;
-      background: var(--accent-navy-light);
-      color: var(--accent-navy);
-    }
-
-    .day-actions {
-      display: flex;
-      gap: 6px;
-    }
-
-    .icon-btn {
-      background: var(--bg-surface);
-      border: 1px solid var(--border-color);
-      color: var(--text-secondary);
-      width: 30px;
-      height: 30px;
-      border-radius: 6px;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      transition: all 0.15s;
-      font-size: 0.82rem;
-    }
-
-    .icon-btn:hover {
-      color: var(--accent-navy);
-      background: var(--accent-navy-light);
-      border-color: var(--accent-navy-border);
-    }
-
-    .icon-btn.delete:hover {
-      background: var(--danger-bg);
-      border-color: var(--danger-border);
-      color: var(--danger);
-    }
-
-    .day-entry-title {
-      font-family: var(--font-serif);
-      font-size: 1.2rem;
-      font-weight: 600;
-      color: var(--text-ink);
-      margin-bottom: 10px;
-    }
-
-    .day-entry-content {
-      color: var(--text-body);
-      font-size: 1.02rem;
-      line-height: 1.8;
-      white-space: pre-wrap;
-      word-break: break-word;
-    }
-
-    body.serif-reading .day-entry-content {
-      font-family: var(--font-serif);
-      font-size: 1.05rem;
-    }
-
-    .empty-state {
-      text-align: center;
-      padding: 56px 24px;
-      background: var(--bg-surface);
-      border: 1px dashed var(--border-strong);
-      border-radius: var(--radius-lg);
-      color: var(--text-secondary);
-    }
-
-    /* ================= MODALS ================= */
-    .modal-backdrop {
-      position: fixed;
-      inset: 0;
-      z-index: 100;
-      background: rgba(17, 24, 39, 0.45);
-      backdrop-filter: blur(2px);
-      display: none;
-      align-items: center;
-      justify-content: center;
-      padding: 20px;
-    }
-
-    .modal-backdrop.open {
-      display: flex;
-    }
-
-    .modal-card {
-      width: 100%;
-      max-width: 620px;
-      background: var(--bg-surface);
-      border: 1px solid var(--border-color);
-      border-top: 4px solid var(--accent-navy);
-      border-radius: var(--radius-lg);
-      padding: 28px;
-      box-shadow: var(--shadow-modal);
-      max-height: 92vh;
-      overflow-y: auto;
-    }
-
-    .modal-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-bottom: 20px;
-      padding-bottom: 12px;
-      border-bottom: 1px solid var(--border-color);
-    }
-
-    .modal-header h3 {
-      font-size: 1.35rem;
-      color: var(--text-ink);
-    }
-
-    .form-row {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 14px;
-    }
-
-    .modal-footer {
-      display: flex;
-      justify-content: flex-end;
-      gap: 10px;
-      margin-top: 22px;
-      padding-top: 16px;
-      border-top: 1px solid var(--border-color);
-    }
-
-    .admin-box {
-      background: var(--bg-subtle);
-      border: 1px solid var(--border-color);
-      border-radius: var(--radius-md);
-      padding: 16px;
-      margin-bottom: 16px;
-    }
-
-    .admin-box h4 {
-      font-size: 0.92rem;
-      color: var(--text-ink);
-      margin-bottom: 6px;
-    }
-
-    .admin-box p {
-      font-size: 0.82rem;
-      color: var(--text-secondary);
-      margin-bottom: 12px;
-    }
-
-    .toast-container {
-      position: fixed;
-      bottom: 24px;
-      right: 24px;
-      z-index: 200;
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-    }
-
-    .toast {
-      background: var(--bg-surface);
-      border: 1px solid var(--border-color);
-      border-left: 4px solid var(--accent-navy);
-      color: var(--text-ink);
-      padding: 12px 16px;
-      border-radius: var(--radius-md);
-      font-size: 0.88rem;
-      font-weight: 500;
-      box-shadow: var(--shadow-modal);
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-    .toast.success { border-left-color: var(--success); }
-    .toast.error { border-left-color: var(--danger); }
 
     .status-msg {
       margin-top: 14px;
       padding: 10px 14px;
       border-radius: var(--radius-md);
-      font-size: 0.85rem;
+      font-size: 0.84rem;
       font-weight: 500;
       display: none;
     }
@@ -873,13 +315,539 @@
       color: var(--success);
     }
 
-    @media (max-width: 880px) {
-      .workspace {
-        grid-template-columns: 1fr;
+    @keyframes shake {
+      0%, 100% { transform: translateX(0); }
+      20%, 60% { transform: translateX(-6px); }
+      40%, 80% { transform: translateX(6px); }
+    }
+    .shake {
+      animation: shake 0.35s ease-in-out;
+      border-top-color: var(--danger) !important;
+    }
+
+    /* ================= 2. MAIN EDITORIAL BLOG INTERFACE ================= */
+    .app-container {
+      display: none;
+      min-height: 100vh;
+      flex-direction: column;
+    }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 40;
+      background: rgba(253, 250, 244, 0.92);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border-light);
+      padding: 12px 28px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .brand {
+      display: flex;
+      align-items: baseline;
+      gap: 10px;
+    }
+
+    .brand-name {
+      font-family: var(--font-display);
+      font-size: 1.32rem;
+      font-weight: 600;
+      color: var(--ink-espresso);
+      letter-spacing: -0.01em;
+    }
+
+    .brand-dot {
+      color: var(--accent-burgundy);
+    }
+
+    .vault-label {
+      font-size: 0.72rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--ink-muted);
+      font-weight: 500;
+    }
+
+    .topbar-controls {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .search-box {
+      position: relative;
+      width: 195px;
+    }
+
+    .search-box input {
+      width: 100%;
+      background: var(--bg-paper-soft);
+      border: 1px solid var(--border-light);
+      border-radius: 999px;
+      padding: 6px 12px 6px 31px;
+      color: var(--ink-espresso);
+      font-size: 0.82rem;
+      outline: none;
+      transition: all 0.18s ease;
+    }
+
+    .search-box input::placeholder {
+      color: var(--ink-muted);
+    }
+
+    .search-box input:focus {
+      background: #ffffff;
+      border-color: var(--accent-bronze);
+      width: 230px;
+    }
+
+    .search-box svg {
+      position: absolute;
+      left: 11px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--ink-muted);
+      width: 14px;
+      height: 14px;
+      pointer-events: none;
+    }
+
+    .meta-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 0.74rem;
+      font-weight: 500;
+      padding: 5px 10px;
+      border-radius: 999px;
+      background: var(--bg-paper-soft);
+      border: 1px solid var(--border-light);
+      color: var(--ink-secondary);
+    }
+
+    .meta-pill.saved .dot {
+      color: var(--success);
+    }
+
+    .meta-pill.syncing {
+      background: var(--accent-burgundy-soft);
+      border-color: var(--accent-burgundy-border);
+      color: var(--accent-burgundy);
+    }
+
+    .meta-pill.warning {
+      background: var(--warning-bg);
+      border-color: var(--warning-border);
+      color: var(--warning);
+    }
+
+    .topbar-divider {
+      width: 1px;
+      height: 18px;
+      background: var(--border-light);
+      margin: 0 2px;
+    }
+
+    /* ================= 3. EDITORIAL READING COLUMN ================= */
+    .blog-shell {
+      width: 100%;
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 48px 24px 100px;
+      flex: 1;
+    }
+
+    .blog-masthead {
+      text-align: center;
+      padding-bottom: 36px;
+      margin-bottom: 44px;
+      border-bottom: 1px solid var(--border-light);
+      position: relative;
+    }
+
+    .blog-masthead::after {
+      content: "✦";
+      position: absolute;
+      bottom: -11px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--bg-parchment);
+      padding: 0 14px;
+      color: var(--accent-bronze);
+      font-size: 0.78rem;
+    }
+
+    .masthead-kicker {
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--accent-bronze);
+      margin-bottom: 10px;
+    }
+
+    .masthead-title {
+      font-family: var(--font-display);
+      font-size: 2.65rem;
+      font-weight: 600;
+      color: var(--ink-espresso);
+      line-height: 1.15;
+      margin-bottom: 10px;
+    }
+
+    .masthead-meta {
+      font-family: var(--font-serif);
+      font-style: italic;
+      font-size: 0.96rem;
+      color: var(--ink-secondary);
+      margin-bottom: 24px;
+    }
+
+    .masthead-actions {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .posts-feed {
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Individual Blog Post */
+    .blog-post {
+      background: var(--bg-paper);
+      border: 1px solid var(--border-light);
+      border-radius: var(--radius-lg);
+      padding: 36px 40px;
+      box-shadow: var(--shadow-sm);
+      transition: box-shadow 0.2s ease, border-color 0.2s ease;
+    }
+
+    .blog-post:hover {
+      border-color: var(--border-strong);
+      box-shadow: var(--shadow-card);
+    }
+
+    .post-separator {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 14px;
+      margin: 26px 0;
+      color: var(--accent-bronze);
+      opacity: 0.65;
+      font-size: 0.72rem;
+      user-select: none;
+    }
+
+    .post-separator::before,
+    .post-separator::after {
+      content: "";
+      width: 48px;
+      height: 1px;
+      background: var(--border-strong);
+    }
+
+    .post-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 18px;
+      margin-bottom: 18px;
+      padding-bottom: 14px;
+      border-bottom: 1px solid var(--border-light);
+    }
+
+    .post-heading {
+      font-family: var(--font-display);
+      font-size: 1.65rem;
+      font-weight: 600;
+      line-height: 1.3;
+      color: var(--ink-espresso);
+      word-break: break-word;
+    }
+
+    .post-tools {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      flex-shrink: 0;
+      padding-top: 4px;
+    }
+
+    .read-time {
+      font-size: 0.74rem;
+      color: var(--ink-muted);
+      margin-right: 4px;
+      white-space: nowrap;
+    }
+
+    .icon-btn {
+      background: transparent;
+      border: 1px solid transparent;
+      color: var(--ink-muted);
+      width: 30px;
+      height: 30px;
+      border-radius: var(--radius-sm);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.15s ease;
+      font-size: 0.85rem;
+    }
+
+    .icon-btn:hover {
+      color: var(--ink-espresso);
+      background: var(--bg-hover);
+      border-color: var(--border-light);
+    }
+
+    .icon-btn.delete:hover {
+      background: var(--danger-bg);
+      border-color: var(--danger-border);
+      color: var(--danger);
+    }
+
+    .post-body {
+      font-family: var(--font-serif);
+      color: var(--ink-body);
+      font-size: 1.07rem;
+      line-height: 1.9;
+      white-space: pre-wrap;
+      word-break: break-word;
+    }
+
+    body.sans-reading .post-body {
+      font-family: var(--font-sans);
+      font-size: 1rem;
+      line-height: 1.82;
+    }
+
+    .empty-state {
+      text-align: center;
+      padding: 64px 28px;
+      background: var(--bg-paper);
+      border: 1px dashed var(--border-strong);
+      border-radius: var(--radius-lg);
+      color: var(--ink-secondary);
+    }
+
+    .empty-state h3 {
+      font-family: var(--font-display);
+      font-size: 1.55rem;
+      color: var(--ink-espresso);
+      margin-bottom: 8px;
+    }
+
+    .empty-state p {
+      font-family: var(--font-serif);
+      font-size: 0.96rem;
+      margin-bottom: 22px;
+    }
+
+    /* ================= 4. MODALS (DISTRACTION-FREE WRITER & SETTINGS) ================= */
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      z-index: 100;
+      background: rgba(38, 28, 23, 0.48);
+      backdrop-filter: blur(3px);
+      -webkit-backdrop-filter: blur(3px);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .modal-backdrop.open {
+      display: flex;
+    }
+
+    .modal-card {
+      width: 100%;
+      max-width: 680px;
+      background: var(--bg-paper);
+      border: 1px solid var(--border-light);
+      border-top: 3px solid var(--accent-burgundy);
+      border-radius: var(--radius-lg);
+      padding: 30px 32px;
+      box-shadow: var(--shadow-modal);
+      max-height: 92vh;
+      overflow-y: auto;
+    }
+
+    .modal-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 22px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid var(--border-light);
+    }
+
+    .modal-header h3 {
+      font-family: var(--font-display);
+      font-size: 1.4rem;
+      color: var(--ink-espresso);
+    }
+
+    .writer-heading-input {
+      width: 100%;
+      background: transparent;
+      border: none;
+      border-bottom: 1px solid var(--border-strong);
+      padding: 8px 2px 12px;
+      font-family: var(--font-display);
+      font-size: 1.55rem;
+      font-weight: 600;
+      color: var(--ink-espresso);
+      outline: none;
+      margin-bottom: 18px;
+      transition: border-color 0.18s ease;
+    }
+
+    .writer-heading-input::placeholder {
+      color: var(--ink-muted);
+      font-weight: 400;
+    }
+
+    .writer-heading-input:focus {
+      border-bottom-color: var(--accent-burgundy);
+    }
+
+    .writer-body-input {
+      width: 100%;
+      min-height: 300px;
+      background: #ffffff;
+      border: 1px solid var(--border-light);
+      border-radius: var(--radius-md);
+      padding: 18px 20px;
+      font-family: var(--font-serif);
+      font-size: 1.05rem;
+      line-height: 1.85;
+      color: var(--ink-body);
+      resize: vertical;
+      outline: none;
+      transition: border-color 0.18s ease, box-shadow 0.18s ease;
+    }
+
+    .writer-body-input::placeholder {
+      color: var(--ink-muted);
+      font-style: italic;
+    }
+
+    .writer-body-input:focus {
+      border-color: var(--accent-burgundy);
+      box-shadow: 0 0 0 3px rgba(122, 40, 50, 0.08);
+    }
+
+    .writer-meta-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 10px;
+      font-size: 0.78rem;
+      color: var(--ink-muted);
+    }
+
+    .modal-footer {
+      display: flex;
+      justify-content: flex-end;
+      gap: 10px;
+      margin-top: 22px;
+      padding-top: 16px;
+      border-top: 1px solid var(--border-light);
+    }
+
+    .admin-box {
+      background: var(--bg-paper-soft);
+      border: 1px solid var(--border-light);
+      border-radius: var(--radius-md);
+      padding: 18px;
+    }
+
+    .admin-box h4 {
+      font-family: var(--font-display);
+      font-size: 1.05rem;
+      color: var(--ink-espresso);
+      margin-bottom: 6px;
+    }
+
+    .admin-box p {
+      font-size: 0.84rem;
+      color: var(--ink-secondary);
+      margin-bottom: 14px;
+      line-height: 1.55;
+    }
+
+    .toast-container {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      z-index: 200;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .toast {
+      background: var(--bg-paper);
+      border: 1px solid var(--border-strong);
+      border-left: 4px solid var(--accent-burgundy);
+      color: var(--ink-espresso);
+      padding: 12px 16px;
+      border-radius: var(--radius-md);
+      font-size: 0.86rem;
+      font-weight: 500;
+      box-shadow: var(--shadow-modal);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .toast.success { border-left-color: var(--success); }
+    .toast.error { border-left-color: var(--danger); }
+
+    @media (max-width: 720px) {
+      .topbar {
+        padding: 12px 16px;
       }
-      .sidebar {
-        position: static;
-        max-height: none;
+      .search-box {
+        width: 100%;
+        order: 10;
+      }
+      .search-box input:focus {
+        width: 100%;
+      }
+      .topbar-divider {
+        display: none;
+      }
+      .blog-shell {
+        padding: 32px 16px 76px;
+      }
+      .masthead-title {
+        font-size: 2.1rem;
+      }
+      .blog-post {
+        padding: 24px 22px;
+      }
+      .post-heading {
+        font-size: 1.38rem;
+      }
+      .auth-card {
+        padding: 30px 24px;
+      }
+      .modal-card {
+        padding: 22px 20px;
       }
       .form-row {
         grid-template-columns: 1fr;
@@ -889,39 +857,39 @@
 </head>
 <body>
 
-  <!-- ================= 1. AUTH / LOGIN / OPEN PUBLIC SIGNUP SCREENS ================= -->
+  <!-- ================= 1. AUTH / SIGN-IN / REGISTER SCREENS ================= -->
   <div id="authWrapper" class="auth-wrapper">
     <div id="authCard" class="auth-card">
 
       <!-- A. Loading State -->
       <div id="authLoadingView">
-        <span class="diary-tag">🔒 Encrypted Journal</span>
-        <h2 class="auth-title serif-heading">Personal Diary</h2>
-        <p class="auth-subtitle">Loading your diary...</p>
+        <div class="auth-kicker">✦ Private Encrypted Vault</div>
+        <h2 class="auth-title display-heading">Pranav Diary</h2>
+        <p class="auth-subtitle">Opening your private journal…</p>
       </div>
 
-      <!-- B. Unified Login Screen (Works for Admin Cloud Account AND Public Local Accounts) -->
+      <!-- B. Unified Sign-In Screen (Admin Cloud Vault + Public Local Vaults) -->
       <div id="loginView" style="display: none;">
-        <span class="diary-tag">🔒 Private Journal</span>
-        <h2 class="auth-title serif-heading">Personal Diary</h2>
-        <p class="auth-subtitle">Sign in with your email and password to unlock your diary.</p>
+        <div class="auth-kicker">✦ Private Encrypted Vault</div>
+        <h2 class="auth-title display-heading">Pranav Diary</h2>
+        <p class="auth-subtitle">Sign in with your email and password to decrypt and read your entries.</p>
 
         <form id="loginForm">
           <div class="form-group">
-            <label class="form-label">Email Address</label>
+            <label class="form-label" for="loginEmail">Email Address</label>
             <input type="email" id="loginEmail" class="form-input" placeholder="you@example.com" autocomplete="username" required />
           </div>
           <div class="form-group">
-            <label class="form-label">Password</label>
-            <input type="password" id="loginPassword" class="form-input" placeholder="Enter your password..." autocomplete="current-password" required />
+            <label class="form-label" for="loginPassword">Password</label>
+            <input type="password" id="loginPassword" class="form-input" placeholder="Enter your password" autocomplete="current-password" required />
           </div>
           <button type="submit" id="loginBtn" class="btn btn-primary btn-full">
-            Sign In & Unlock
+            Unlock Diary
           </button>
         </form>
 
-        <!-- Emergency Admin Token Recovery (Only appears if Admin email+password is verified AND GitHub reports expired token) -->
-        <div id="expiredTokenBox" style="display: none; margin-top: 16px; padding-top: 14px; border-top: 1px solid var(--border-color);">
+        <!-- Emergency Admin Token Recovery (Shown only if Admin email+password verified AND GitHub token expired) -->
+        <div id="expiredTokenBox" style="display: none; margin-top: 18px; padding-top: 16px; border-top: 1px solid var(--border-light);">
           <label class="form-label" style="color: var(--danger);">GitHub Token Expired — Paste New Token (Admin Verified)</label>
           <input type="password" id="emergencyTokenInput" class="form-input mono" placeholder="ghp_..." style="margin-bottom: 10px;" />
           <button type="button" class="btn btn-primary btn-full" onclick="recoverExpiredAdminToken()">Save New Token & Unlock</button>
@@ -939,32 +907,32 @@
         </div>
       </div>
 
-      <!-- C. Open Public Account Registration (Zero Invite Code Needed — Encrypted Local Browser Vault) -->
+      <!-- C. Public Account Registration (AES-256 Local Browser Vault) -->
       <div id="publicRegisterView" style="display: none;">
-        <span class="diary-tag">✨ Create Free Account</span>
-        <h2 class="auth-title serif-heading">Create Personal Diary</h2>
-        <p class="auth-subtitle">Register with your email and password to start your own encrypted diary.</p>
+        <div class="auth-kicker">✦ Create Private Account</div>
+        <h2 class="auth-title display-heading">Begin Your Journal</h2>
+        <p class="auth-subtitle">Register with your email and password to create your own encrypted diary.</p>
 
         <div class="privacy-note">
-          🔒 <strong>100% Private on Your Device:</strong> Your diary entries are encrypted with AES-256 using your Email & Password and stored privately inside your browser's local storage.
+          <strong>Private on Your Device:</strong> Your entries are encrypted client-side with AES-256 using your Email &amp; Password and stored solely in your browser's local storage.
         </div>
 
         <form id="publicRegisterForm">
           <div class="form-group">
-            <label class="form-label">Your Name</label>
+            <label class="form-label" for="regName">Your Name</label>
             <input type="text" id="regName" class="form-input" placeholder="Enter your name" required />
           </div>
           <div class="form-group">
-            <label class="form-label">Email Address</label>
+            <label class="form-label" for="regEmail">Email Address</label>
             <input type="email" id="regEmail" class="form-input" placeholder="you@example.com" required />
           </div>
           <div class="form-row">
             <div class="form-group">
-              <label class="form-label">Password</label>
+              <label class="form-label" for="regPassword">Password</label>
               <input type="password" id="regPassword" class="form-input" placeholder="Min 6 characters" minlength="6" required />
             </div>
             <div class="form-group">
-              <label class="form-label">Confirm Password</label>
+              <label class="form-label" for="regConfirm">Confirm Password</label>
               <input type="password" id="regConfirm" class="form-input" placeholder="Repeat password" minlength="6" required />
             </div>
           </div>
@@ -982,28 +950,28 @@
         </div>
       </div>
 
-      <!-- D. Change Password BEFORE Login View (Works for both Admin Cloud & Public Local Accounts) -->
+      <!-- D. Change Password Before Login -->
       <div id="preChangePassView" style="display: none;">
-        <span class="diary-tag">🔑 Password Settings</span>
-        <h2 class="auth-title serif-heading">Change Password</h2>
-        <p class="auth-subtitle">Verify your email and current password to re-encrypt your diary with a new password.</p>
+        <div class="auth-kicker">✦ Password Rotation</div>
+        <h2 class="auth-title display-heading">Change Password</h2>
+        <p class="auth-subtitle">Verify your email and current password to re-encrypt your vault with a new password.</p>
 
         <form id="preChangePassForm">
           <div class="form-group">
-            <label class="form-label">Your Email Address</label>
+            <label class="form-label" for="preEmail">Email Address</label>
             <input type="email" id="preEmail" class="form-input" placeholder="you@example.com" required />
           </div>
           <div class="form-group">
-            <label class="form-label">Current Password</label>
-            <input type="password" id="preOldPass" class="form-input" placeholder="Enter current password..." required />
+            <label class="form-label" for="preOldPass">Current Password</label>
+            <input type="password" id="preOldPass" class="form-input" placeholder="Enter current password" required />
           </div>
           <div class="form-row">
             <div class="form-group">
-              <label class="form-label">New Password</label>
+              <label class="form-label" for="preNewPass">New Password</label>
               <input type="password" id="preNewPass" class="form-input" placeholder="Min 6 chars" minlength="6" required />
             </div>
             <div class="form-group">
-              <label class="form-label">Confirm New</label>
+              <label class="form-label" for="preConfirmPass">Confirm New</label>
               <input type="password" id="preConfirmPass" class="form-input" placeholder="Confirm new" minlength="6" required />
             </div>
           </div>
@@ -1021,35 +989,35 @@
         </div>
       </div>
 
-      <!-- E. One-Time Admin Setup View (Only shown before Admin account is initialized) -->
+      <!-- E. One-Time Admin Setup -->
       <div id="setupView" style="display: none;">
-        <span class="diary-tag">⚙️ One-Time Admin Setup</span>
-        <h2 class="auth-title serif-heading">Initialize Admin Account</h2>
-        <p class="auth-subtitle">Set up your Admin Email & Password and link your private GitHub repository (`diary-vault`).</p>
+        <div class="auth-kicker">✦ One-Time Setup</div>
+        <h2 class="auth-title display-heading">Initialize Vault</h2>
+        <p class="auth-subtitle">Set up your Admin credentials and connect your private GitHub repository (<code>diary-vault</code>).</p>
 
         <form id="setupForm">
           <div class="form-row">
             <div class="form-group">
-              <label class="form-label">Your Name</label>
+              <label class="form-label" for="setupName">Your Name</label>
               <input type="text" id="setupName" class="form-input" value="Pranav" required />
             </div>
             <div class="form-group">
-              <label class="form-label">Admin Email Address</label>
+              <label class="form-label" for="setupEmail">Admin Email</label>
               <input type="email" id="setupEmail" class="form-input" placeholder="you@example.com" required />
             </div>
           </div>
           <div class="form-row">
             <div class="form-group">
-              <label class="form-label">Admin Password</label>
+              <label class="form-label" for="setupPassword">Admin Password</label>
               <input type="password" id="setupPassword" class="form-input" placeholder="Min 6 characters" minlength="6" required />
             </div>
             <div class="form-group">
-              <label class="form-label">Confirm Password</label>
+              <label class="form-label" for="setupConfirm">Confirm Password</label>
               <input type="password" id="setupConfirm" class="form-input" placeholder="Repeat password" minlength="6" required />
             </div>
           </div>
           <div class="form-group">
-            <label class="form-label">GitHub Personal Access Token (diary-forever)</label>
+            <label class="form-label" for="setupToken">GitHub Personal Access Token</label>
             <input type="password" id="setupToken" class="form-input mono" placeholder="ghp_..." required />
           </div>
           <div style="display: none;">
@@ -1058,7 +1026,7 @@
             <input type="text" id="setupPrivateRepo" value="diary-vault" />
           </div>
           <button type="submit" id="setupBtn" class="btn btn-primary btn-full">
-            Initialize Admin Account
+            Initialize Admin Vault
           </button>
         </form>
 
@@ -1068,16 +1036,13 @@
     </div>
   </div>
 
-  <!-- ================= 2. UNLOCKED DIARY APPLICATION ================= -->
+  <!-- ================= 2. UNLOCKED EDITORIAL BLOG VIEW ================= -->
   <div id="appContainer" class="app-container">
 
     <header class="topbar">
       <div class="brand">
-        <div class="brand-icon" id="brandAvatar">P</div>
-        <div class="brand-text">
-          <h1 class="serif-heading" id="diaryHeaderTitle">Personal Diary</h1>
-          <span id="userBadge">Private Encrypted Storage</span>
-        </div>
+        <span class="brand-name" id="brandName">Pranav Diary<span class="brand-dot">.</span></span>
+        <span class="vault-label" id="userBadge">Encrypted Vault</span>
       </div>
 
       <div class="topbar-controls">
@@ -1086,159 +1051,116 @@
             <circle cx="11" cy="11" r="8"></circle>
             <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
           </svg>
-          <input type="text" id="searchInput" placeholder="Search entries..." oninput="renderDiary()" />
+          <input type="text" id="searchInput" placeholder="Search entries..." oninput="renderFeed()" />
         </div>
 
-        <button class="btn btn-secondary btn-sm" id="fontToggleBtn" onclick="toggleReadingFont()">
-          Aa Font: Sans
+        <button class="btn btn-ghost" id="fontToggleBtn" onclick="toggleReadingFont()" title="Switch reading typeface">
+          Aa · Serif
         </button>
 
-        <div id="syncIndicator" class="status-badge">
-          <span>●</span> <span id="syncText">Saved</span>
+        <div id="syncIndicator" class="meta-pill saved">
+          <span class="dot">●</span> <span id="syncText">Saved</span>
         </div>
 
-        <div id="inactivityPill" class="timer-badge mono" title="Auto-locks after 5 minutes of inactivity">
-          ⏱️ <span id="timerDisplay">05:00</span>
+        <div id="inactivityPill" class="meta-pill mono" title="Auto-locks after 5 minutes of inactivity">
+          <span id="timerDisplay">05:00</span>
         </div>
 
-        <!-- Strictly visible ONLY to Admin -->
-        <button id="adminSettingsBtn" class="btn btn-secondary btn-sm" style="display: none;" onclick="openAdminModal()">
-          ⚙️ Token Settings
+        <span class="topbar-divider"></span>
+
+        <button class="btn btn-primary btn-sm" onclick="openPostModal()">
+          + Write
         </button>
 
-        <button class="btn btn-secondary btn-sm" onclick="openInAppPasswordModal()">
-          Change Password
+        <!-- Visible strictly to Admin -->
+        <button id="adminSettingsBtn" class="btn btn-ghost" style="display: none;" onclick="openAdminModal()" title="Admin GitHub Token Settings">
+          Token
         </button>
 
-        <button class="btn btn-danger btn-sm" onclick="lockVault('Signed out')">
+        <button class="btn btn-ghost" onclick="openInAppPasswordModal()">
+          Password
+        </button>
+
+        <button class="btn btn-danger-ghost" onclick="lockVault('Signed out safely')">
           Lock
         </button>
       </div>
     </header>
 
-    <main class="workspace">
-      <aside class="sidebar">
-        <div class="sidebar-header">
-          <span class="sidebar-title">Months & Dates</span>
-          <button class="link-btn" onclick="openMonthModal()">+ Add Month</button>
+    <main class="blog-shell">
+      <section class="blog-masthead">
+        <div class="masthead-kicker" id="mastheadKicker">Private Encrypted Journal</div>
+        <h1 class="masthead-title" id="blogTitle">Pranav Diary</h1>
+        <p class="masthead-meta" id="entryCountLabel">Personal reflections, encrypted end-to-end.</p>
+        <div class="masthead-actions">
+          <button class="btn btn-primary" onclick="openPostModal()">
+            + New Entry
+          </button>
         </div>
-        <ul id="sidebarTimeline" class="month-nav-list"></ul>
-      </aside>
-
-      <section class="feed">
-        <div class="action-banner">
-          <div class="action-banner-left">
-            <h2 class="serif-heading" id="bannerWelcome">My Journal</h2>
-            <p id="bannerSubtext">Organized by Month and Date & Day. Latest entries always appear at the top.</p>
-          </div>
-          <div class="action-banner-buttons">
-            <button class="btn btn-secondary" onclick="openMonthModal()">
-              + Add Month
-            </button>
-            <button class="btn btn-primary" onclick="openEntryModal()">
-              + New Date & Entry
-            </button>
-          </div>
-        </div>
-
-        <div id="monthsFeed" class="feed"></div>
       </section>
+
+      <div id="postsFeed" class="posts-feed"></div>
     </main>
+
   </div>
 
-  <!-- ================= MODAL 1: ADD / EDIT MONTH ================= -->
-  <div id="monthModal" class="modal-backdrop">
-    <div class="modal-card" style="max-width: 420px;">
-      <div class="modal-header">
-        <h3 class="serif-heading" id="monthModalTitle">Add Month</h3>
-        <button class="icon-btn" onclick="closeMonthModal()">✕</button>
-      </div>
-      <form id="monthForm">
-        <input type="hidden" id="editMonthId" />
-        <div class="form-group">
-          <label class="form-label">Month Title</label>
-          <input type="text" id="monthLabelInput" class="form-input" placeholder="e.g. Nov 2026" required />
-        </div>
-        <div class="form-group">
-          <label class="form-label">Month Order (Keeps newest month on top)</label>
-          <input type="month" id="monthSortInput" class="form-input mono" required />
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" onclick="closeMonthModal()">Cancel</button>
-          <button type="submit" class="btn btn-primary">Save Month</button>
-        </div>
-      </form>
-    </div>
-  </div>
-
-  <!-- ================= MODAL 2: ADD / EDIT DATE & DAY SUBSECTION ================= -->
-  <div id="entryModal" class="modal-backdrop">
+  <!-- ================= MODAL 1: WRITE / EDIT POST ================= -->
+  <div id="postModal" class="modal-backdrop">
     <div class="modal-card">
       <div class="modal-header">
-        <h3 class="serif-heading" id="entryModalTitle">New Diary Entry</h3>
-        <button class="icon-btn" onclick="closeEntryModal()">✕</button>
+        <h3 id="postModalTitle">New Entry</h3>
+        <button type="button" class="icon-btn" onclick="closePostModal()" title="Close">✕</button>
       </div>
-      <form id="entryForm">
-        <input type="hidden" id="editEntryId" />
+      <form id="postForm">
+        <input type="hidden" id="editPostId" />
 
-        <div class="form-row">
-          <div class="form-group">
-            <label class="form-label">Month</label>
-            <select id="entryMonthSelect" class="form-select" required></select>
-          </div>
-          <div class="form-group">
-            <label class="form-label">Date</label>
-            <input type="date" id="entryIsoDate" class="form-input mono" onchange="autoFillDateHeading()" required />
-          </div>
-        </div>
+        <input
+          type="text"
+          id="postHeading"
+          class="writer-heading-input"
+          placeholder="Heading (add your date & title here)..."
+          required
+        />
 
-        <div class="form-row">
-          <div class="form-group">
-            <label class="form-label">Date & Day Heading</label>
-            <input type="text" id="entryDateLabel" class="form-input" placeholder="e.g. 19 Nov — Thursday" required />
-          </div>
-          <div class="form-group">
-            <label class="form-label">Tag / Mood (Optional)</label>
-            <input type="text" id="entryMood" class="form-input" placeholder="e.g. Reflection, Work, Personal" />
-          </div>
-        </div>
+        <textarea
+          id="postContent"
+          class="writer-body-input"
+          placeholder="Write freely..."
+          oninput="updateWordCount()"
+          required
+        ></textarea>
 
-        <div class="form-group">
-          <label class="form-label">Heading / Subject (Optional)</label>
-          <input type="text" id="entryTitle" class="form-input" placeholder="Optional title for this entry..." />
-        </div>
-
-        <div class="form-group">
-          <label class="form-label">Diary Entry</label>
-          <textarea id="entryContent" class="form-textarea" placeholder="Write your thoughts here..." required></textarea>
+        <div class="writer-meta-bar">
+          <span id="wordCountDisplay">0 words</span>
+          <span>Encrypted with AES-256 · Ctrl/Cmd + Enter to save</span>
         </div>
 
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" onclick="closeEntryModal()">Cancel</button>
-          <button type="submit" id="saveEntryBtn" class="btn btn-primary">Save Entry</button>
+          <button type="button" class="btn btn-secondary" onclick="closePostModal()">Cancel</button>
+          <button type="submit" id="savePostBtn" class="btn btn-primary">Publish to Vault</button>
         </div>
       </form>
     </div>
   </div>
 
-  <!-- ================= MODAL 3: IN-APP CHANGE PASSWORD ================= -->
+  <!-- ================= MODAL 2: IN-APP CHANGE PASSWORD ================= -->
   <div id="inAppPassModal" class="modal-backdrop">
     <div class="modal-card" style="max-width: 420px;">
       <div class="modal-header">
-        <h3 class="serif-heading">Change Your Password</h3>
-        <button class="icon-btn" onclick="closeInAppPasswordModal()">✕</button>
+        <h3>Change Password</h3>
+        <button type="button" class="icon-btn" onclick="closeInAppPasswordModal()" title="Close">✕</button>
       </div>
       <form id="inAppPassForm">
         <div class="form-group">
-          <label class="form-label">Current Password</label>
+          <label class="form-label" for="inAppOldPass">Current Password</label>
           <input type="password" id="inAppOldPass" class="form-input" required />
         </div>
         <div class="form-group">
-          <label class="form-label">New Password</label>
+          <label class="form-label" for="inAppNewPass">New Password</label>
           <input type="password" id="inAppNewPass" class="form-input" minlength="6" required />
         </div>
         <div class="form-group">
-          <label class="form-label">Confirm New Password</label>
+          <label class="form-label" for="inAppConfirmPass">Confirm New Password</label>
           <input type="password" id="inAppConfirmPass" class="form-input" minlength="6" required />
         </div>
         <div class="modal-footer">
@@ -1249,20 +1171,20 @@
     </div>
   </div>
 
-  <!-- ================= MODAL 4: ADMIN-ONLY TOKEN SETTINGS ================= -->
+  <!-- ================= MODAL 3: ADMIN-ONLY TOKEN SETTINGS ================= -->
   <div id="adminModal" class="modal-backdrop">
     <div class="modal-card" style="max-width: 480px;">
       <div class="modal-header">
-        <h3 class="serif-heading">Admin GitHub Token Settings</h3>
-        <button class="icon-btn" onclick="closeAdminModal()">✕</button>
+        <h3>Admin GitHub Token</h3>
+        <button type="button" class="icon-btn" onclick="closeAdminModal()" title="Close">✕</button>
       </div>
 
-      <div class="admin-box" style="margin-bottom: 0;">
-        <h4>Update GitHub Personal Access Token</h4>
-        <p>Rotate your GitHub token anytime. Your token is encrypted solely behind your Admin Email & Password and is never shared with public visitors.</p>
+      <div class="admin-box">
+        <h4>Rotate GitHub Personal Access Token</h4>
+        <p>Update your GitHub token anytime. It stays encrypted strictly behind your Admin Email &amp; Password and is never accessible to public accounts.</p>
         <div style="display: flex; gap: 10px;">
           <input type="password" id="adminNewTokenInput" class="form-input mono" placeholder="ghp_..." />
-          <button type="button" class="btn btn-primary btn-sm" onclick="adminUpdateToken()">Update Token</button>
+          <button type="button" class="btn btn-primary btn-sm" onclick="adminUpdateToken()">Update</button>
         </div>
       </div>
 
@@ -1307,21 +1229,25 @@
       diarySha: null,
       authSha: null,
       authRegistry: null,
-      diaryData: { months: [] },
+      diaryData: { posts: [] },
       lastActivity: Date.now(),
       timerInterval: null,
       pendingAdminRecovery: null
     };
 
-    function toggleReadingFont() {
-      document.body.classList.toggle('serif-reading');
-      const isSerif = document.body.classList.contains('serif-reading');
-      document.getElementById('fontToggleBtn').textContent = isSerif ? 'Aa Font: Serif' : 'Aa Font: Sans';
-      localStorage.setItem('diary_font_pref', isSerif ? 'serif' : 'sans');
+    function applySavedFontPref() {
+      const pref = localStorage.getItem('diary_blog_font_pref') || 'serif';
+      const isSans = pref === 'sans';
+      document.body.classList.toggle('sans-reading', isSans);
+      const btn = document.getElementById('fontToggleBtn');
+      if (btn) btn.textContent = isSans ? 'Aa · Sans' : 'Aa · Serif';
     }
 
-    if (localStorage.getItem('diary_font_pref') === 'serif') {
-      document.body.classList.add('serif-reading');
+    function toggleReadingFont() {
+      document.body.classList.toggle('sans-reading');
+      const isSans = document.body.classList.contains('sans-reading');
+      document.getElementById('fontToggleBtn').textContent = isSans ? 'Aa · Sans' : 'Aa · Serif';
+      localStorage.setItem('diary_blog_font_pref', isSans ? 'sans' : 'serif');
     }
 
     /********************************************************************
@@ -1362,8 +1288,13 @@
     async function hashEmailToId(email) {
       const clean = normalizeEmail(email);
       const digest = await crypto.subtle.digest('SHA-256', enc.encode('diary_user_v3::' + clean));
-      const arr = Array.from(new Uint8Array(digest));
-      return arr.map(b => b.toString(16).padStart(2, '0')).join('').slice(0, 20);
+      return Array.from(new Uint8Array(digest)).map(b => b.toString(16).padStart(2, '0')).join('').slice(0, 20);
+    }
+
+    async function computeLegacyV2Hash(email) {
+      const clean = normalizeEmail(email);
+      const digest = await crypto.subtle.digest('SHA-256', enc.encode('diary_user_v2::' + clean));
+      return Array.from(new Uint8Array(digest)).map(b => b.toString(16).padStart(2, '0')).join('').slice(0, 20);
     }
 
     async function deriveKey(secretString, saltBytes, iterations = PBKDF2_ITERATIONS) {
@@ -1418,7 +1349,98 @@
     }
 
     /********************************************************************
-     * 3. LOCAL STORAGE HELPERS (FOR PUBLIC VISITORS)
+     * 3. SEAMLESS MIGRATION (MONTHS/DATES -> FLAT BLOG POSTS)
+     ********************************************************************/
+    function createStarterDiaryData(name = 'Pranav') {
+      const now = Date.now();
+      return {
+        posts: [
+          {
+            id: 'p_' + now,
+            heading: `Welcome to ${name === 'Pranav' ? 'Pranav Diary' : name + "'s Diary"}`,
+            content: 'Your private journal is encrypted end-to-end with AES-256 using your Email and Password.\n\nWrite your dates, titles, and reflections freely—everything stays locked behind your personal key.',
+            createdAt: now,
+            updatedAt: now
+          }
+        ]
+      };
+    }
+
+    function normalizeDiaryData(rawData, displayName = 'Pranav') {
+      if (!rawData || typeof rawData !== 'object') {
+        return createStarterDiaryData(displayName);
+      }
+
+      // Already in flat blog post format
+      if (Array.isArray(rawData.posts)) {
+        const posts = rawData.posts.map((p, idx) => ({
+          id: p.id || `p_${Date.now()}_${idx}`,
+          heading: String(p.heading || 'Untitled Entry'),
+          content: String(p.content || ''),
+          createdAt: typeof p.createdAt === 'number' ? p.createdAt : (p.updatedAt || Date.now() - idx * 1000),
+          updatedAt: typeof p.updatedAt === 'number' ? p.updatedAt : Date.now()
+        }));
+        return { posts };
+      }
+
+      // Backward-compatible migration from legacy Months -> Entries structure
+      if (Array.isArray(rawData.months)) {
+        const sortedMonths = [...rawData.months].sort((a, b) =>
+          (b.sortKey || '').localeCompare(a.sortKey || '')
+        );
+
+        const migratedPosts = [];
+        let fallbackBase = Date.now();
+
+        sortedMonths.forEach((month) => {
+          const entries = [...(month.entries || [])].sort((a, b) => {
+            const cmp = (b.isoDate || '').localeCompare(a.isoDate || '');
+            return cmp !== 0 ? cmp : (b.updatedAt || 0) - (a.updatedAt || 0);
+          });
+
+          entries.forEach((entry, idx) => {
+            const datePart = (entry.dateLabel || '').trim();
+            const titlePart = (entry.title || '').trim();
+            let heading = 'Untitled Entry';
+
+            if (datePart && titlePart) {
+              heading = `${datePart} — ${titlePart}`;
+            } else if (titlePart) {
+              heading = titlePart;
+            } else if (datePart) {
+              heading = datePart;
+            } else if (month.label) {
+              heading = month.label;
+            }
+
+            let parsedTime = entry.updatedAt || null;
+            if (!parsedTime && entry.isoDate) {
+              const t = Date.parse(entry.isoDate);
+              if (!Number.isNaN(t)) parsedTime = t;
+            }
+            if (!parsedTime) {
+              fallbackBase -= 1000;
+              parsedTime = fallbackBase;
+            }
+
+            migratedPosts.push({
+              id: entry.id || `p_${parsedTime}_${idx}`,
+              heading,
+              content: String(entry.content || ''),
+              createdAt: parsedTime,
+              updatedAt: entry.updatedAt || parsedTime
+            });
+          });
+        });
+
+        return { posts: migratedPosts };
+      }
+
+      return createStarterDiaryData(displayName);
+    }
+
+    /********************************************************************
+     * 4. LOCAL STORAGE HELPERS (PUBLIC ACCOUNTS)
      ********************************************************************/
     function getLocalUsersMap() {
       try {
@@ -1433,7 +1455,7 @@
     }
 
     /********************************************************************
-     * 4. GITHUB REST API HELPERS (FOR ADMIN CLOUD VAULT)
+     * 5. GITHUB REST API HELPERS (ADMIN CLOUD VAULT)
      ********************************************************************/
     async function githubGetFile(owner, repo, path, token = null) {
       const headers = { 'Accept': 'application/vnd.github.v3+json' };
@@ -1486,7 +1508,7 @@
     }
 
     /********************************************************************
-     * 5. BOOT & VIEW SWITCHING
+     * 6. BOOT & AUTH VIEW SWITCHING
      ********************************************************************/
     async function loadLatestAuthRegistry() {
       let authFile = await githubGetFile(
@@ -1506,14 +1528,10 @@
     }
 
     async function initApp() {
-      if (localStorage.getItem('diary_font_pref') === 'serif') {
-        const btn = document.getElementById('fontToggleBtn');
-        if (btn) btn.textContent = 'Aa Font: Serif';
-      }
+      applySavedFontPref();
 
       try {
         const authFile = await loadLatestAuthRegistry();
-        // Recognize both v2 and v3 Admin registries
         if (authFile && authFile.content && (authFile.content.v === 3 || authFile.content.v === 2) && authFile.content.users) {
           session.authRegistry = authFile.content;
           session.authSha = authFile.sha;
@@ -1524,7 +1542,7 @@
         } else {
           showSetupView();
         }
-      } catch (e) {
+      } catch {
         showSetupView();
       }
     }
@@ -1580,7 +1598,7 @@
     }
 
     /********************************************************************
-     * 6. ONE-TIME ADMIN SETUP (GITHUB CLOUD VAULT)
+     * 7. ONE-TIME ADMIN SETUP
      ********************************************************************/
     document.getElementById('setupForm').addEventListener('submit', async (e) => {
       e.preventDefault();
@@ -1601,7 +1619,7 @@
 
       const btn = document.getElementById('setupBtn');
       btn.disabled = true;
-      btn.textContent = 'Initializing Admin & Encrypting...';
+      btn.textContent = 'Initializing Vault...';
 
       try {
         const userHash = await hashEmailToId(email);
@@ -1633,22 +1651,21 @@
         };
 
         let existingDiary = await githubGetFile(owner, privateRepo, DEFAULT_CONFIG.adminDiaryFile, token);
-        let initialDiaryData = null;
+        let rawDiaryData = null;
 
         if (existingDiary && existingDiary.content && existingDiary.content.ct) {
           try {
-            initialDiaryData = await decryptPayload(existingDiary.content, secret);
+            rawDiaryData = await decryptPayload(existingDiary.content, secret);
           } catch {
             try {
-              initialDiaryData = await decryptPayload(existingDiary.content, password);
+              rawDiaryData = await decryptPayload(existingDiary.content, password);
             } catch {
-              initialDiaryData = createStarterDiaryData(displayName);
+              rawDiaryData = null;
             }
           }
-        } else {
-          initialDiaryData = createStarterDiaryData(displayName);
         }
 
+        const initialDiaryData = normalizeDiaryData(rawDiaryData, displayName);
         const encryptedDiary = await encryptPayload(initialDiaryData, secret);
 
         const diarySha = await githubPutFile(
@@ -1691,56 +1708,18 @@
         };
 
         enterUnlockedApp();
-        showToast('Admin account initialized!', 'success');
+        showToast('Admin vault initialized', 'success');
       } catch (err) {
         setStatus('setupStatus', 'error', `Initialization failed: ${err.message}`);
       } finally {
         btn.disabled = false;
-        btn.textContent = 'Initialize Admin Account';
+        btn.textContent = 'Initialize Admin Vault';
       }
     });
 
-    function createStarterDiaryData(name = 'My') {
-      const now = new Date();
-      const monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-      const dayNames = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
-      const monthLabel = `${monthNames[now.getMonth()]} ${now.getFullYear()}`;
-      const sortKey = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}`;
-      const isoDate = `${sortKey}-${String(now.getDate()).padStart(2, '0')}`;
-      const dateLabel = `${String(now.getDate()).padStart(2, '0')} ${monthNames[now.getMonth()]} — ${dayNames[now.getDay()]}`;
-
-      return {
-        months: [
-          {
-            id: 'm_' + Date.now(),
-            label: monthLabel,
-            sortKey: sortKey,
-            entries: [
-              {
-                id: 'e_' + Date.now(),
-                isoDate: isoDate,
-                dateLabel: dateLabel,
-                timeLabel: formatTimeNow(),
-                title: `Welcome, ${name}`,
-                mood: 'Personal',
-                content: 'Your personal diary is encrypted with your Email and Password using AES-256. Use the buttons above to add new months or daily entries.',
-                updatedAt: Date.now()
-              }
-            ]
-          }
-        ]
-      };
-    }
-
     /********************************************************************
-     * 7. UNIFIED SIGN IN (CHECKS ADMIN CLOUD VAULT FIRST, THEN LOCAL USERS)
+     * 8. UNIFIED SIGN-IN (CLOUD ADMIN VAULT + LOCAL PUBLIC VAULTS)
      ********************************************************************/
-    async function computeLegacyV2Hash(email) {
-      const clean = normalizeEmail(email);
-      const digest = await crypto.subtle.digest('SHA-256', enc.encode('diary_user_v2::' + clean));
-      return Array.from(new Uint8Array(digest)).map(b => b.toString(16).padStart(2, '0')).join('').slice(0, 20);
-    }
-
     document.getElementById('loginForm').addEventListener('submit', async (e) => {
       e.preventDefault();
       clearStatusMessages();
@@ -1752,14 +1731,14 @@
       const card = document.getElementById('authCard');
 
       btn.disabled = true;
-      btn.textContent = 'Signing In...';
+      btn.textContent = 'Decrypting...';
 
       try {
         const secret = compositeSecret(email, password);
         const v3Hash = await hashEmailToId(email);
         const v2Hash = await computeLegacyV2Hash(email);
 
-        // 1. Check Admin / Cloud Registry first
+        // 1. Check Cloud Admin Registry first
         const freshAuth = await loadLatestAuthRegistry();
         if (freshAuth && freshAuth.content && freshAuth.content.users) {
           session.authRegistry = freshAuth.content;
@@ -1793,15 +1772,16 @@
             throw apiErr;
           }
 
-          let diaryData;
+          let rawDiaryData = null;
           let diarySha = null;
 
           if (diaryFileRes && diaryFileRes.content) {
-            diaryData = await decryptPayload(diaryFileRes.content, secret);
+            rawDiaryData = await decryptPayload(diaryFileRes.content, secret);
             diarySha = diaryFileRes.sha;
-          } else {
-            diaryData = createStarterDiaryData(displayName || cloudRecord.displayName);
           }
+
+          const resolvedName = displayName || cloudRecord.displayName || 'Pranav';
+          const diaryData = normalizeDiaryData(rawDiaryData, resolvedName);
 
           session = {
             ...session,
@@ -1810,7 +1790,7 @@
             email,
             userHash: activeCloudHash,
             password,
-            displayName: displayName || cloudRecord.displayName || 'Pranav',
+            displayName: resolvedName,
             role: role || cloudRecord.role || 'admin',
             diaryFileName: targetDiaryFile,
             token,
@@ -1826,7 +1806,7 @@
           return;
         }
 
-        // 2. Otherwise check Public Visitor Local Browser Storage
+        // 2. Otherwise check Local Browser Accounts
         const localUsers = getLocalUsersMap();
         const localRecord = localUsers[v3Hash];
 
@@ -1834,12 +1814,14 @@
           throw new Error('Invalid email or password.');
         }
 
-        let localDiaryData;
+        let rawLocalDiary;
         try {
-          localDiaryData = await decryptPayload(localRecord.encryptedDiary, secret);
+          rawLocalDiary = await decryptPayload(localRecord.encryptedDiary, secret);
         } catch {
           throw new Error('Invalid email or password.');
         }
+
+        const resolvedName = localRecord.displayName || 'Guest';
 
         session = {
           ...session,
@@ -1848,10 +1830,10 @@
           email,
           userHash: v3Hash,
           password,
-          displayName: localRecord.displayName || 'Guest',
+          displayName: resolvedName,
           role: 'public_user',
           token: null,
-          diaryData: localDiaryData
+          diaryData: normalizeDiaryData(rawLocalDiary, resolvedName)
         };
 
         document.getElementById('loginPassword').value = '';
@@ -1863,7 +1845,7 @@
         setStatus('loginStatus', 'error', err.message || 'Invalid email or password.');
       } finally {
         btn.disabled = false;
-        btn.textContent = 'Sign In & Unlock';
+        btn.textContent = 'Unlock Diary';
       }
     });
 
@@ -1891,14 +1873,14 @@
         );
 
         document.getElementById('expiredTokenBox').style.display = 'none';
-        setStatus('loginStatus', 'success', 'Token updated! Click Sign In & Unlock to continue.');
+        setStatus('loginStatus', 'success', 'Token updated! Click Unlock Diary to continue.');
       } catch (err) {
         setStatus('loginStatus', 'error', `Token update failed: ${err.message}`);
       }
     }
 
     /********************************************************************
-     * 8. PUBLIC VISITOR REGISTRATION (ZERO INVITE CODE, LOCAL ENCRYPTED)
+     * 9. PUBLIC ACCOUNT REGISTRATION
      ********************************************************************/
     document.getElementById('publicRegisterForm').addEventListener('submit', async (e) => {
       e.preventDefault();
@@ -1915,7 +1897,7 @@
 
       const btn = document.getElementById('regBtn');
       btn.disabled = true;
-      btn.textContent = 'Creating Encrypted Diary...';
+      btn.textContent = 'Creating Encrypted Vault...';
 
       try {
         const userHash = await hashEmailToId(email);
@@ -1951,7 +1933,7 @@
         };
 
         enterUnlockedApp();
-        showToast(`Welcome, ${displayName}! Your private diary is ready.`, 'success');
+        showToast(`Welcome, ${displayName}. Your private diary is ready.`, 'success');
       } catch (err) {
         setStatus('regStatus', 'error', err.message);
       } finally {
@@ -1961,7 +1943,7 @@
     });
 
     /********************************************************************
-     * 9. CHANGE PASSWORD (PRE-LOGIN & IN-APP FOR BOTH MODES)
+     * 10. PASSWORD ROTATION (PRE-LOGIN & IN-APP)
      ********************************************************************/
     async function executeUserPasswordRotation(emailInput, oldPassword, newPassword) {
       const email = normalizeEmail(emailInput);
@@ -1970,7 +1952,6 @@
       const v3Hash = await hashEmailToId(email);
       const v2Hash = await computeLegacyV2Hash(email);
 
-      // Case A: Admin / GitHub Cloud Account
       const freshAuth = await loadLatestAuthRegistry();
       if (freshAuth && freshAuth.content && freshAuth.content.users) {
         session.authRegistry = freshAuth.content;
@@ -2033,7 +2014,6 @@
         return;
       }
 
-      // Case B: Public Local Browser Account
       const localUsers = getLocalUsersMap();
       const localRecord = localUsers[v3Hash];
       if (!localRecord) {
@@ -2077,7 +2057,7 @@
         await executeUserPasswordRotation(email, oldPass, newPass);
         document.getElementById('preChangePassForm').reset();
         showLoginView();
-        setStatus('loginStatus', 'success', 'Password updated! Sign in with your new password.');
+        setStatus('loginStatus', 'success', 'Password updated. Sign in with your new password.');
       } catch (err) {
         setStatus('preChangeStatus', 'error', err.message);
       } finally {
@@ -2089,6 +2069,7 @@
     function openInAppPasswordModal() {
       document.getElementById('inAppPassForm').reset();
       document.getElementById('inAppPassModal').classList.add('open');
+      setTimeout(() => document.getElementById('inAppOldPass').focus(), 50);
     }
 
     function closeInAppPasswordModal() {
@@ -2112,7 +2093,7 @@
       try {
         await executeUserPasswordRotation(session.email, oldPass, newPass);
         closeInAppPasswordModal();
-        showToast('Your password has been updated!', 'success');
+        showToast('Password updated and vault re-encrypted', 'success');
       } catch (err) {
         showToast(err.message, 'error');
       } finally {
@@ -2122,12 +2103,13 @@
     });
 
     /********************************************************************
-     * 10. ADMIN-ONLY TOKEN ROTATION MODAL
+     * 11. ADMIN-ONLY TOKEN ROTATION
      ********************************************************************/
     function openAdminModal() {
       if (session.role !== 'admin' || session.storageMode !== 'github') return;
       document.getElementById('adminNewTokenInput').value = '';
       document.getElementById('adminModal').classList.add('open');
+      setTimeout(() => document.getElementById('adminNewTokenInput').focus(), 50);
     }
 
     function closeAdminModal() {
@@ -2166,14 +2148,14 @@
         session.token = newToken;
         document.getElementById('adminNewTokenInput').value = '';
         closeAdminModal();
-        showToast('GitHub token updated and encrypted!', 'success');
+        showToast('GitHub token updated and encrypted', 'success');
       } catch (err) {
         showToast(`Token update failed: ${err.message}`, 'error');
       }
     }
 
     /********************************************************************
-     * 11. 5-MINUTE INACTIVITY AUTO-LOCK
+     * 12. 5-MINUTE INACTIVITY AUTO-LOCK
      ********************************************************************/
     function resetActivityTimer() {
       if (!session.unlocked) return;
@@ -2206,10 +2188,7 @@
         const display = document.getElementById('timerDisplay');
         const pill = document.getElementById('inactivityPill');
         if (display) display.textContent = `${mins}:${secs}`;
-        if (pill) {
-          if (totalSecs <= 30) pill.classList.add('warning');
-          else pill.classList.remove('warning');
-        }
+        if (pill) pill.classList.toggle('warning', totalSecs <= 30);
 
         if (remaining <= 0) {
           lockVault('Auto-locked after 5 minutes of inactivity');
@@ -2223,11 +2202,11 @@
       session.email = null;
       session.password = null;
       session.token = null;
-      session.diaryData = { months: [] };
+      session.diaryData = { posts: [] };
 
       document.querySelectorAll('.modal-backdrop').forEach(m => m.classList.remove('open'));
-      document.getElementById('monthsFeed').innerHTML = '';
-      document.getElementById('sidebarTimeline').innerHTML = '';
+      document.getElementById('postsFeed').innerHTML = '';
+      document.getElementById('searchInput').value = '';
 
       document.getElementById('appContainer').style.display = 'none';
       document.getElementById('authWrapper').style.display = 'flex';
@@ -2236,48 +2215,48 @@
     }
 
     /********************************************************************
-     * 12. RENDER & MANAGE MONTHS -> DATE & DAY SUBSECTIONS
+     * 13. EDITORIAL BLOG FEED & SAVE LOGIC
      ********************************************************************/
     function enterUnlockedApp() {
       document.getElementById('authWrapper').style.display = 'none';
       document.getElementById('appContainer').style.display = 'flex';
 
-      const initial = (session.displayName || 'P').charAt(0).toUpperCase();
-      document.getElementById('brandAvatar').textContent = initial;
-      document.getElementById('bannerWelcome').textContent = `${session.displayName}'s Journal`;
-
       const isAdminCloud = session.role === 'admin' && session.storageMode === 'github';
+      const journalName = isAdminCloud ? 'Pranav Diary' : `${session.displayName}'s Diary`;
+
+      document.title = journalName;
+      document.getElementById('brandName').innerHTML = `${escapeHtml(journalName)}<span class="brand-dot">.</span>`;
+      document.getElementById('blogTitle').textContent = journalName;
       document.getElementById('userBadge').textContent = isAdminCloud
-        ? 'Cloud Vault • AES-256 Encrypted'
-        : 'Local Device Vault • AES-256 Encrypted';
+        ? 'Cloud Vault · AES-256'
+        : 'Device Vault · AES-256';
+      document.getElementById('mastheadKicker').textContent = isAdminCloud
+        ? 'Private Encrypted Journal'
+        : 'Private Local Journal';
 
       document.getElementById('adminSettingsBtn').style.display = isAdminCloud ? 'inline-flex' : 'none';
 
       startInactivityWatcher();
-      sortDiaryStructure();
-      renderDiary();
+      sortPosts();
+      renderFeed();
     }
 
-    function sortDiaryStructure() {
-      if (!session.diaryData.months) session.diaryData.months = [];
-      session.diaryData.months.sort((a, b) => (b.sortKey || '').localeCompare(a.sortKey || ''));
-      session.diaryData.months.forEach(m => {
-        if (!m.entries) m.entries = [];
-        m.entries.sort((a, b) => {
-          const cmp = (b.isoDate || '').localeCompare(a.isoDate || '');
-          return cmp !== 0 ? cmp : (b.updatedAt || 0) - (a.updatedAt || 0);
-        });
-      });
+    function sortPosts() {
+      if (!session.diaryData || !Array.isArray(session.diaryData.posts)) {
+        session.diaryData = { posts: [] };
+      }
+      session.diaryData.posts.sort((a, b) => (b.createdAt || 0) - (a.createdAt || 0));
     }
 
     async function saveDiaryChanges(commitMsg = 'Update encrypted diary') {
       const pill = document.getElementById('syncIndicator');
       const text = document.getElementById('syncText');
+      pill.classList.remove('saved');
       pill.classList.add('syncing');
       text.textContent = 'Saving...';
 
       try {
-        sortDiaryStructure();
+        sortPosts();
         const secret = compositeSecret(session.email, session.password);
         const encryptedDiary = await encryptPayload(session.diaryData, secret);
 
@@ -2300,8 +2279,9 @@
         }
 
         pill.classList.remove('syncing');
+        pill.classList.add('saved');
         text.textContent = 'Saved';
-        showToast('Changes saved', 'success');
+        showToast('Saved & encrypted', 'success');
       } catch (err) {
         pill.classList.remove('syncing');
         text.textContent = 'Save Error';
@@ -2314,314 +2294,180 @@
         .replace(/&/g, '&amp;')
         .replace(/</g, '&lt;')
         .replace(/>/g, '&gt;')
-        .replace(/"/g, '&quot;');
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#39;');
     }
 
-    function renderDiary() {
+    function estimateReadTime(text) {
+      const words = String(text || '').trim().split(/\s+/).filter(Boolean).length;
+      const mins = Math.max(1, Math.round(words / 200));
+      return `${mins} min read`;
+    }
+
+    function renderFeed() {
       const query = (document.getElementById('searchInput').value || '').trim().toLowerCase();
-      const feed = document.getElementById('monthsFeed');
-      const sidebar = document.getElementById('sidebarTimeline');
+      const feed = document.getElementById('postsFeed');
+      const allPosts = (session.diaryData && session.diaryData.posts) || [];
 
-      feed.innerHTML = '';
-      sidebar.innerHTML = '';
+      const countLabel = document.getElementById('entryCountLabel');
+      if (countLabel) {
+        countLabel.textContent = allPosts.length === 0
+          ? 'A quiet page waiting for your first thought.'
+          : `${allPosts.length} ${allPosts.length === 1 ? 'private entry' : 'private entries'} · Encrypted end-to-end`;
+      }
 
-      const months = session.diaryData.months || [];
+      const filtered = allPosts.filter(post => {
+        if (!query) return true;
+        return (
+          (post.heading || '').toLowerCase().includes(query) ||
+          (post.content || '').toLowerCase().includes(query)
+        );
+      });
 
-      if (months.length === 0) {
+      if (allPosts.length === 0) {
         feed.innerHTML = `
           <div class="empty-state">
-            <h3 class="serif-heading" style="font-size: 1.4rem; color: var(--text-ink); margin-bottom: 6px;">No Entries Yet</h3>
-            <p style="margin-bottom: 18px;">Start by adding a Month (e.g., Nov 2026) or writing your first entry.</p>
-            <button class="btn btn-primary" onclick="openEntryModal()">+ New Date & Entry</button>
+            <h3>Your Journal Awaits</h3>
+            <p>Begin with a heading and whatever is on your mind today.</p>
+            <button type="button" class="btn btn-primary" onclick="openPostModal()">+ Write First Entry</button>
           </div>
         `;
         return;
       }
 
-      months.forEach((month) => {
-        const filteredEntries = (month.entries || []).filter(entry => {
-          if (!query) return true;
-          return (
-            (month.label || '').toLowerCase().includes(query) ||
-            (entry.dateLabel || '').toLowerCase().includes(query) ||
-            (entry.title || '').toLowerCase().includes(query) ||
-            (entry.mood || '').toLowerCase().includes(query) ||
-            (entry.content || '').toLowerCase().includes(query)
-          );
-        });
-
-        if (query && filteredEntries.length === 0 && !month.label.toLowerCase().includes(query)) {
-          return;
-        }
-
-        const navLi = document.createElement('li');
-        const dayLinksHtml = filteredEntries.slice(0, 10).map(e => `
-          <li>
-            <a href="#entry_${e.id}" class="day-nav-link">${escapeHtml(e.dateLabel)}${e.title ? ' · ' + escapeHtml(e.title) : ''}</a>
-          </li>
-        `).join('');
-
-        navLi.innerHTML = `
-          <button class="month-nav-btn" onclick="document.getElementById('month_${month.id}').scrollIntoView({behavior: 'smooth'})">
-            <span>${escapeHtml(month.label)}</span>
-            <span class="month-count-badge">${month.entries.length}</span>
-          </button>
-          ${dayLinksHtml ? `<ul class="day-sublist">${dayLinksHtml}</ul>` : ''}
-        `;
-        sidebar.appendChild(navLi);
-
-        const section = document.createElement('article');
-        section.className = 'month-section';
-        section.id = `month_${month.id}`;
-
-        const entriesHtml = filteredEntries.length > 0
-          ? filteredEntries.map(entry => `
-              <div class="day-card" id="entry_${entry.id}">
-                <div class="day-header">
-                  <div class="day-heading-group">
-                    <span class="day-date-badge">${escapeHtml(entry.dateLabel)}</span>
-                    ${entry.timeLabel ? `<span class="day-time-badge mono">${escapeHtml(entry.timeLabel)}</span>` : ''}
-                    ${entry.mood ? `<span class="day-mood-badge">${escapeHtml(entry.mood)}</span>` : ''}
-                  </div>
-                  <div class="day-actions">
-                    <button class="icon-btn" title="Edit Entry" onclick="openEntryModal('${month.id}', '${entry.id}')">✎</button>
-                    <button class="icon-btn delete" title="Delete Entry" onclick="deleteEntry('${month.id}', '${entry.id}')">✕</button>
-                  </div>
-                </div>
-                ${entry.title ? `<div class="day-entry-title">${escapeHtml(entry.title)}</div>` : ''}
-                <div class="day-entry-content">${escapeHtml(entry.content)}</div>
-              </div>
-            `).join('')
-          : `<div style="color: var(--text-muted); font-size: 0.9rem;">No entries in ${escapeHtml(month.label)} yet. Click "+ Add Date / Entry" above.</div>`;
-
-        section.innerHTML = `
-          <div class="month-header" onclick="toggleMonthCollapse('${month.id}')">
-            <div class="month-header-left">
-              <div class="month-chevron">▼</div>
-              <h3 class="month-title serif-heading">${escapeHtml(month.label)}</h3>
-              <span class="month-meta">${month.entries.length} ${month.entries.length === 1 ? 'Entry' : 'Entries'}</span>
-            </div>
-            <div class="month-header-actions" onclick="event.stopPropagation()">
-              <button class="btn btn-primary btn-sm" onclick="openEntryModal('${month.id}')">+ Add Date / Entry</button>
-              <button class="icon-btn" title="Edit Month" onclick="openMonthModal('${month.id}')">✎</button>
-              <button class="icon-btn delete" title="Delete Month" onclick="deleteMonth('${month.id}')">✕</button>
-            </div>
-          </div>
-          <div class="month-body">
-            ${entriesHtml}
+      if (filtered.length === 0) {
+        feed.innerHTML = `
+          <div class="empty-state">
+            <h3>No Matching Entries</h3>
+            <p>Nothing matched "${escapeHtml(query)}".</p>
           </div>
         `;
+        return;
+      }
 
-        feed.appendChild(section);
-      });
+      feed.innerHTML = filtered.map((post, idx) => `
+        <article class="blog-post" data-post-id="${escapeHtml(post.id)}">
+          <div class="post-header">
+            <h2 class="post-heading">${escapeHtml(post.heading)}</h2>
+            <div class="post-tools">
+              <span class="read-time">${estimateReadTime(post.content)}</span>
+              <button type="button" class="icon-btn" data-action="edit" data-post-id="${escapeHtml(post.id)}" title="Edit Entry">✎</button>
+              <button type="button" class="icon-btn delete" data-action="delete" data-post-id="${escapeHtml(post.id)}" title="Delete Entry">✕</button>
+            </div>
+          </div>
+          <div class="post-body">${escapeHtml(post.content)}</div>
+        </article>
+        ${idx < filtered.length - 1 ? '<div class="post-separator" aria-hidden="true">✦</div>' : ''}
+      `).join('');
     }
 
-    function toggleMonthCollapse(monthId) {
-      const el = document.getElementById(`month_${monthId}`);
-      if (el) el.classList.toggle('collapsed');
-    }
+    // Event delegation for Edit / Delete buttons (avoids inline JS string interpolation)
+    document.getElementById('postsFeed').addEventListener('click', (e) => {
+      const btn = e.target.closest('button[data-action]');
+      if (!btn) return;
+      const postId = btn.getAttribute('data-post-id');
+      const action = btn.getAttribute('data-action');
+      if (action === 'edit') openPostModal(postId);
+      if (action === 'delete') deletePost(postId);
+    });
 
     /********************************************************************
-     * 13. ADD / EDIT / DELETE MONTH & DATE ENTRIES
+     * 14. WRITE / EDIT / DELETE POSTS
      ********************************************************************/
-    function openMonthModal(monthId = null) {
-      const modal = document.getElementById('monthModal');
-      const title = document.getElementById('monthModalTitle');
-      const idInput = document.getElementById('editMonthId');
-      const labelInput = document.getElementById('monthLabelInput');
-      const sortInput = document.getElementById('monthSortInput');
+    function updateWordCount() {
+      const text = document.getElementById('postContent').value.trim();
+      const count = text ? text.split(/\s+/).length : 0;
+      document.getElementById('wordCountDisplay').textContent = `${count} ${count === 1 ? 'word' : 'words'}`;
+    }
 
-      if (monthId) {
-        const m = session.diaryData.months.find(x => x.id === monthId);
-        if (!m) return;
-        title.textContent = 'Edit Month';
-        idInput.value = m.id;
-        labelInput.value = m.label;
-        sortInput.value = m.sortKey;
+    function openPostModal(postId = null) {
+      const modal = document.getElementById('postModal');
+      const titleEl = document.getElementById('postModalTitle');
+      const idInput = document.getElementById('editPostId');
+      const headingInput = document.getElementById('postHeading');
+      const contentInput = document.getElementById('postContent');
+      const saveBtn = document.getElementById('savePostBtn');
+
+      if (postId) {
+        const post = session.diaryData.posts.find(p => p.id === postId);
+        if (!post) return;
+        titleEl.textContent = 'Edit Entry';
+        saveBtn.textContent = 'Save Changes';
+        idInput.value = post.id;
+        headingInput.value = post.heading || '';
+        contentInput.value = post.content || '';
       } else {
-        const now = new Date();
-        const monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-        title.textContent = 'Add Month';
+        titleEl.textContent = 'New Entry';
+        saveBtn.textContent = 'Publish to Vault';
         idInput.value = '';
-        labelInput.value = `${monthNames[now.getMonth()]} ${now.getFullYear()}`;
-        sortInput.value = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}`;
+        headingInput.value = '';
+        contentInput.value = '';
       }
 
+      updateWordCount();
       modal.classList.add('open');
-      setTimeout(() => labelInput.focus(), 50);
+      setTimeout(() => (postId ? contentInput : headingInput).focus(), 50);
     }
 
-    function closeMonthModal() {
-      document.getElementById('monthModal').classList.remove('open');
+    function closePostModal() {
+      document.getElementById('postModal').classList.remove('open');
     }
 
-    document.getElementById('monthForm').addEventListener('submit', async (e) => {
+    document.getElementById('postForm').addEventListener('submit', async (e) => {
       e.preventDefault();
-      const editId = document.getElementById('editMonthId').value;
-      const label = document.getElementById('monthLabelInput').value.trim();
-      const sortKey = document.getElementById('monthSortInput').value;
+      const editId = document.getElementById('editPostId').value;
+      const heading = document.getElementById('postHeading').value.trim();
+      const content = document.getElementById('postContent').value;
+
+      if (!heading) return;
 
       if (editId) {
-        const m = session.diaryData.months.find(x => x.id === editId);
-        if (m) {
-          m.label = label;
-          m.sortKey = sortKey;
+        const existing = session.diaryData.posts.find(p => p.id === editId);
+        if (existing) {
+          existing.heading = heading;
+          existing.content = content;
+          existing.updatedAt = Date.now();
         }
       } else {
-        session.diaryData.months.unshift({
-          id: 'm_' + Date.now(),
-          label,
-          sortKey,
-          entries: []
-        });
-      }
-
-      closeMonthModal();
-      sortDiaryStructure();
-      renderDiary();
-      await saveDiaryChanges(`Save month: ${label}`);
-    });
-
-    async function deleteMonth(monthId) {
-      const m = session.diaryData.months.find(x => x.id === monthId);
-      if (!m) return;
-      if (!confirm(`Delete "${m.label}" and all entries inside it?`)) return;
-
-      session.diaryData.months = session.diaryData.months.filter(x => x.id !== monthId);
-      renderDiary();
-      await saveDiaryChanges(`Delete month: ${m.label}`);
-    }
-
-    function formatTimeNow() {
-      return new Date().toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' });
-    }
-
-    function autoFillDateHeading() {
-      const iso = document.getElementById('entryIsoDate').value;
-      if (!iso) return;
-      const [y, m, d] = iso.split('-').map(Number);
-      const dt = new Date(y, m - 1, d);
-      const monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-      const dayNames = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
-      document.getElementById('entryDateLabel').value = `${String(d).padStart(2, '0')} ${monthNames[dt.getMonth()]} — ${dayNames[dt.getDay()]}`;
-    }
-
-    function openEntryModal(defaultMonthId = null, entryId = null) {
-      const modal = document.getElementById('entryModal');
-      const select = document.getElementById('entryMonthSelect');
-
-      if (!session.diaryData.months || session.diaryData.months.length === 0) {
-        const now = new Date();
-        const monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-        session.diaryData.months = [{
-          id: 'm_' + Date.now(),
-          label: `${monthNames[now.getMonth()]} ${now.getFullYear()}`,
-          sortKey: `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}`,
-          entries: []
-        }];
-      }
-
-      select.innerHTML = session.diaryData.months.map(m =>
-        `<option value="${m.id}">${escapeHtml(m.label)}</option>`
-      ).join('');
-
-      if (defaultMonthId) select.value = defaultMonthId;
-
-      if (entryId && defaultMonthId) {
-        const month = session.diaryData.months.find(m => m.id === defaultMonthId);
-        const entry = month ? month.entries.find(e => e.id === entryId) : null;
-        if (!entry) return;
-
-        document.getElementById('entryModalTitle').textContent = 'Edit Diary Entry';
-        document.getElementById('editEntryId').value = `${defaultMonthId}::${entry.id}`;
-        document.getElementById('entryIsoDate').value = entry.isoDate || '';
-        document.getElementById('entryDateLabel').value = entry.dateLabel || '';
-        document.getElementById('entryMood').value = entry.mood || '';
-        document.getElementById('entryTitle').value = entry.title || '';
-        document.getElementById('entryContent').value = entry.content || '';
-      } else {
-        const now = new Date();
-        const isoToday = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}-${String(now.getDate()).padStart(2, '0')}`;
-        document.getElementById('entryModalTitle').textContent = 'New Diary Entry';
-        document.getElementById('editEntryId').value = '';
-        document.getElementById('entryIsoDate').value = isoToday;
-        autoFillDateHeading();
-        document.getElementById('entryMood').value = '';
-        document.getElementById('entryTitle').value = '';
-        document.getElementById('entryContent').value = '';
-      }
-
-      modal.classList.add('open');
-      setTimeout(() => document.getElementById('entryContent').focus(), 60);
-    }
-
-    function closeEntryModal() {
-      document.getElementById('entryModal').classList.remove('open');
-    }
-
-    document.getElementById('entryForm').addEventListener('submit', async (e) => {
-      e.preventDefault();
-
-      const targetMonthId = document.getElementById('entryMonthSelect').value;
-      const editComposite = document.getElementById('editEntryId').value;
-      const isoDate = document.getElementById('entryIsoDate').value;
-      const dateLabel = document.getElementById('entryDateLabel').value.trim();
-      const mood = document.getElementById('entryMood').value.trim();
-      const title = document.getElementById('entryTitle').value.trim();
-      const content = document.getElementById('entryContent').value;
-
-      const targetMonth = session.diaryData.months.find(m => m.id === targetMonthId);
-      if (!targetMonth) return;
-
-      if (editComposite) {
-        const [origMonthId, entryId] = editComposite.split('::');
-        const origMonth = session.diaryData.months.find(m => m.id === origMonthId);
-        let existingEntry = origMonth ? origMonth.entries.find(x => x.id === entryId) : null;
-
-        if (existingEntry) {
-          existingEntry.isoDate = isoDate;
-          existingEntry.dateLabel = dateLabel;
-          existingEntry.mood = mood;
-          existingEntry.title = title;
-          existingEntry.content = content;
-          existingEntry.updatedAt = Date.now();
-
-          if (origMonthId !== targetMonthId) {
-            origMonth.entries = origMonth.entries.filter(x => x.id !== entryId);
-            targetMonth.entries.unshift(existingEntry);
-          }
-        }
-      } else {
-        targetMonth.entries.unshift({
-          id: 'e_' + Date.now(),
-          isoDate,
-          dateLabel,
-          timeLabel: formatTimeNow(),
-          mood,
-          title,
+        const now = Date.now();
+        session.diaryData.posts.unshift({
+          id: 'p_' + now,
+          heading,
           content,
-          updatedAt: Date.now()
+          createdAt: now,
+          updatedAt: now
         });
       }
 
-      closeEntryModal();
-      sortDiaryStructure();
-      renderDiary();
-      await saveDiaryChanges(`Save entry: ${dateLabel}`);
+      closePostModal();
+      sortPosts();
+      renderFeed();
+      await saveDiaryChanges(editId ? `Edit entry: ${heading}` : `Add entry: ${heading}`);
     });
 
-    async function deleteEntry(monthId, entryId) {
-      const month = session.diaryData.months.find(m => m.id === monthId);
-      if (!month) return;
-      const entry = month.entries.find(e => e.id === entryId);
-      if (!entry) return;
+    async function deletePost(postId) {
+      const post = session.diaryData.posts.find(p => p.id === postId);
+      if (!post) return;
+      if (!confirm(`Delete "${post.heading}" permanently?`)) return;
 
-      if (!confirm(`Delete entry "${entry.dateLabel}"?`)) return;
-
-      month.entries = month.entries.filter(e => e.id !== entryId);
-      renderDiary();
-      await saveDiaryChanges(`Delete entry: ${entry.dateLabel}`);
+      session.diaryData.posts = session.diaryData.posts.filter(p => p.id !== postId);
+      renderFeed();
+      await saveDiaryChanges(`Delete entry: ${post.heading}`);
     }
+
+    // Keyboard shortcuts: Escape closes modals, Cmd/Ctrl+Enter saves in writer
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        closePostModal();
+        closeInAppPasswordModal();
+        closeAdminModal();
+      }
+      if ((e.metaKey || e.ctrlKey) && e.key === 'Enter') {
+        if (document.getElementById('postModal').classList.contains('open')) {
+          document.getElementById('postForm').requestSubmit();
+        }
+      }
+    });
 
     function showToast(message, type = 'success') {
       const container = document.getElementById('toastContainer');
