@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Pranav Diary</title>
+  <title>Personal Diary</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Lora:ital,wght@0,400;0,500;0,600;1,400&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,400;1,500&display=swap" rel="stylesheet">
@@ -1060,14 +1060,14 @@
       <!-- A. Loading State -->
       <div id="authLoadingView">
         <div class="auth-kicker">✦ Private Encrypted Vault</div>
-        <h2 class="auth-title display-heading">Pranav Diary</h2>
+        <h2 class="auth-title display-heading">Personal Diary</h2>
         <p class="auth-subtitle">Opening your private journal…</p>
       </div>
 
       <!-- B. Unified Sign-In Screen (Admin Cloud Vault + Public Local Vaults) -->
       <div id="loginView" style="display: none;">
         <div class="auth-kicker">✦ Private Encrypted Vault</div>
-        <h2 class="auth-title display-heading">Pranav Diary</h2>
+        <h2 class="auth-title display-heading">Personal Diary</h2>
         <p class="auth-subtitle">Sign in with your email and password to decrypt and read your entries.</p>
 
         <form id="loginForm">
@@ -2572,6 +2572,7 @@
       session.mediaPending.clear();
       draftPhotos = [];
       removedGithubPhotoPaths = [];
+      document.title = 'Personal Diary';
 
       closeLightbox();
       document.querySelectorAll('.modal-backdrop').forEach(m => m.classList.remove('open'));
