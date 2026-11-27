@@ -455,7 +455,7 @@
       margin: 0 2px;
     }
 
-    /* ================= 3. EDITORIAL READING COLUMN ================= */
+    /* ================= 3. FULL-WIDTH EDITORIAL READING COLUMN ================= */
     .blog-shell {
       width: 100%;
       max-width: 100%;
@@ -466,8 +466,8 @@
 
     .blog-masthead {
       text-align: center;
-      padding-bottom: 36px;
-      margin-bottom: 44px;
+      padding-bottom: 34px;
+      margin-bottom: 40px;
       border-bottom: 1px solid var(--border-light);
       position: relative;
     }
@@ -633,6 +633,63 @@
       line-height: 1.82;
     }
 
+    /* Post Photo Gallery */
+    .post-photos {
+      margin-top: 24px;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+      gap: 14px;
+    }
+
+    .post-photos.single {
+      grid-template-columns: minmax(0, 560px);
+    }
+
+    .photo-tile {
+      position: relative;
+      background: var(--bg-paper-soft);
+      border: 1px solid var(--border-light);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      min-height: 170px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
+    }
+
+    .photo-tile.loaded {
+      cursor: zoom-in;
+      min-height: 0;
+    }
+
+    .photo-tile.loaded:hover {
+      border-color: var(--accent-bronze);
+      box-shadow: var(--shadow-card);
+      transform: translateY(-1px);
+    }
+
+    .photo-tile img {
+      width: 100%;
+      height: 240px;
+      object-fit: cover;
+      display: block;
+    }
+
+    .post-photos.single .photo-tile img {
+      height: auto;
+      max-height: 440px;
+      object-fit: cover;
+    }
+
+    .photo-placeholder {
+      font-size: 0.78rem;
+      color: var(--ink-muted);
+      font-style: italic;
+      padding: 20px;
+      text-align: center;
+    }
+
     .empty-state {
       text-align: center;
       padding: 64px 28px;
@@ -655,7 +712,7 @@
       margin-bottom: 22px;
     }
 
-    /* ================= 4. MODALS (DISTRACTION-FREE WRITER & SETTINGS) ================= */
+    /* ================= 4. MODALS (WRITER, LIGHTBOX & SETTINGS) ================= */
     .modal-backdrop {
       position: fixed;
       inset: 0;
@@ -675,7 +732,7 @@
 
     .modal-card {
       width: 100%;
-      max-width: 680px;
+      max-width: 820px;
       background: var(--bg-paper);
       border: 1px solid var(--border-light);
       border-top: 3px solid var(--accent-burgundy);
@@ -727,7 +784,7 @@
 
     .writer-body-input {
       width: 100%;
-      min-height: 300px;
+      min-height: 260px;
       background: #ffffff;
       border: 1px solid var(--border-light);
       border-radius: var(--radius-md);
@@ -758,6 +815,142 @@
       margin-top: 10px;
       font-size: 0.78rem;
       color: var(--ink-muted);
+    }
+
+    /* Photo Attachment Bar in Editor */
+    .photo-attach-section {
+      margin-top: 18px;
+      padding-top: 16px;
+      border-top: 1px solid var(--border-light);
+    }
+
+    .photo-dropzone {
+      border: 1px dashed var(--border-strong);
+      background: var(--bg-paper-soft);
+      border-radius: var(--radius-md);
+      padding: 12px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+      transition: border-color 0.16s ease, background-color 0.16s ease;
+    }
+
+    .photo-dropzone.dragover {
+      border-color: var(--accent-burgundy);
+      background: var(--accent-burgundy-soft);
+    }
+
+    .photo-dropzone-text {
+      font-size: 0.82rem;
+      color: var(--ink-secondary);
+    }
+
+    .photo-dropzone-text strong {
+      color: var(--ink-espresso);
+      font-weight: 600;
+    }
+
+    .draft-photos-grid {
+      margin-top: 14px;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(126px, 1fr));
+      gap: 12px;
+    }
+
+    .draft-photo-card {
+      position: relative;
+      background: #ffffff;
+      border: 1px solid var(--border-light);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+    }
+
+    .draft-photo-card img {
+      width: 100%;
+      height: 92px;
+      object-fit: cover;
+      display: block;
+      background: var(--bg-paper-soft);
+    }
+
+    .draft-photo-meta {
+      padding: 5px 8px;
+      font-size: 0.7rem;
+      color: var(--ink-secondary);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      border-top: 1px solid var(--border-light);
+    }
+
+    .draft-photo-remove {
+      position: absolute;
+      top: 5px;
+      right: 5px;
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      border: none;
+      background: rgba(38, 28, 23, 0.76);
+      color: #fdfaf4;
+      font-size: 0.72rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background-color 0.15s;
+    }
+
+    .draft-photo-remove:hover {
+      background: var(--danger);
+    }
+
+    /* Fullscreen Lightbox */
+    .lightbox-backdrop {
+      position: fixed;
+      inset: 0;
+      z-index: 150;
+      background: rgba(24, 17, 14, 0.88);
+      backdrop-filter: blur(4px);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+
+    .lightbox-backdrop.open {
+      display: flex;
+    }
+
+    .lightbox-backdrop img {
+      max-width: 92vw;
+      max-height: 88vh;
+      border-radius: var(--radius-md);
+      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.5);
+      border: 1px solid rgba(253, 250, 244, 0.18);
+    }
+
+    .lightbox-close {
+      position: fixed;
+      top: 20px;
+      right: 24px;
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      border: 1px solid rgba(253, 250, 244, 0.25);
+      background: rgba(38, 28, 23, 0.75);
+      color: #fdfaf4;
+      font-size: 1rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .lightbox-close:hover {
+      background: var(--accent-burgundy);
     }
 
     .modal-footer {
@@ -832,22 +1025,25 @@
         display: none;
       }
       .blog-shell {
-        padding: 32px 16px 76px;
+        padding: 28px 16px 76px;
       }
       .masthead-title {
         font-size: 2.1rem;
       }
       .blog-post {
-        padding: 24px 22px;
+        padding: 24px 20px;
       }
       .post-heading {
         font-size: 1.38rem;
+      }
+      .post-photos {
+        grid-template-columns: 1fr;
       }
       .auth-card {
         padding: 30px 24px;
       }
       .modal-card {
-        padding: 22px 20px;
+        padding: 22px 18px;
       }
       .form-row {
         grid-template-columns: 1fr;
@@ -888,7 +1084,7 @@
           </button>
         </form>
 
-        <!-- Emergency Admin Token Recovery (Shown only if Admin email+password verified AND GitHub token expired) -->
+        <!-- Emergency Admin Token Recovery -->
         <div id="expiredTokenBox" style="display: none; margin-top: 18px; padding-top: 16px; border-top: 1px solid var(--border-light);">
           <label class="form-label" style="color: var(--danger);">GitHub Token Expired — Paste New Token (Admin Verified)</label>
           <input type="password" id="emergencyTokenInput" class="form-input mono" placeholder="ghp_..." style="margin-bottom: 10px;" />
@@ -907,7 +1103,7 @@
         </div>
       </div>
 
-      <!-- C. Public Account Registration (AES-256 Local Browser Vault) -->
+      <!-- C. Public Account Registration -->
       <div id="publicRegisterView" style="display: none;">
         <div class="auth-kicker">✦ Create Private Account</div>
         <h2 class="auth-title display-heading">Begin Your Journal</h2>
@@ -1104,7 +1300,7 @@
 
   </div>
 
-  <!-- ================= MODAL 1: WRITE / EDIT POST ================= -->
+  <!-- ================= MODAL 1: WRITE / EDIT POST WITH COMPRESSED PHOTOS ================= -->
   <div id="postModal" class="modal-backdrop">
     <div class="modal-card">
       <div class="modal-header">
@@ -1135,6 +1331,22 @@
           <span>Encrypted with AES-256 · Ctrl/Cmd + Enter to save</span>
         </div>
 
+        <!-- Photo Attachment Dropzone & Previews -->
+        <div class="photo-attach-section">
+          <div id="photoDropzone" class="photo-dropzone">
+            <div class="photo-dropzone-text">
+              <strong>Photos</strong> · Automatically compressed &amp; encrypted (up to 6 per entry, drag &amp; drop or paste)
+            </div>
+            <div>
+              <input type="file" id="photoFileInput" accept="image/*" multiple style="display: none;" />
+              <button type="button" id="attachPhotoBtn" class="btn btn-secondary btn-sm" onclick="document.getElementById('photoFileInput').click()">
+                + Attach Photos
+              </button>
+            </div>
+          </div>
+          <div id="draftPhotosGrid" class="draft-photos-grid" style="display: none;"></div>
+        </div>
+
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" onclick="closePostModal()">Cancel</button>
           <button type="submit" id="savePostBtn" class="btn btn-primary">Publish to Vault</button>
@@ -1143,7 +1355,13 @@
     </div>
   </div>
 
-  <!-- ================= MODAL 2: IN-APP CHANGE PASSWORD ================= -->
+  <!-- ================= MODAL 2: PHOTO LIGHTBOX ================= -->
+  <div id="lightboxModal" class="lightbox-backdrop" onclick="closeLightbox(event)">
+    <button type="button" class="lightbox-close" onclick="closeLightbox()" title="Close">✕</button>
+    <img id="lightboxImage" src="" alt="Full-size entry photo" />
+  </div>
+
+  <!-- ================= MODAL 3: IN-APP CHANGE PASSWORD ================= -->
   <div id="inAppPassModal" class="modal-backdrop">
     <div class="modal-card" style="max-width: 420px;">
       <div class="modal-header">
@@ -1171,7 +1389,7 @@
     </div>
   </div>
 
-  <!-- ================= MODAL 3: ADMIN-ONLY TOKEN SETTINGS ================= -->
+  <!-- ================= MODAL 4: ADMIN-ONLY TOKEN SETTINGS ================= -->
   <div id="adminModal" class="modal-backdrop">
     <div class="modal-card" style="max-width: 480px;">
       <div class="modal-header">
@@ -1212,6 +1430,9 @@
 
     const INACTIVITY_LIMIT_MS = 5 * 60 * 1000; // 5 minutes
     const PBKDF2_ITERATIONS = 600000;
+    const MAX_PHOTOS_PER_POST = 6;
+    const MAX_IMAGE_EDGE = 1280; // px
+    const IMAGE_QUALITY = 0.76;
 
     let session = {
       unlocked: false,
@@ -1229,11 +1450,17 @@
       diarySha: null,
       authSha: null,
       authRegistry: null,
-      diaryData: { posts: [] },
+      diaryData: { mediaKey: null, posts: [] },
+      mediaCache: new Map(), // photoId -> decrypted dataUrl (cleared on lock)
+      mediaPending: new Map(), // photoId -> in-flight Promise
       lastActivity: Date.now(),
       timerInterval: null,
       pendingAdminRecovery: null
     };
+
+    // Temporary state while Write/Edit modal is open
+    let draftPhotos = [];
+    let removedGithubPhotoPaths = [];
 
     function applySavedFontPref() {
       const pref = localStorage.getItem('diary_blog_font_pref') || 'serif';
@@ -1251,14 +1478,17 @@
     }
 
     /********************************************************************
-     * 2. WEB CRYPTO API (SHA-256 + PBKDF2 + AES-256-GCM)
+     * 2. WEB CRYPTO API (SHA-256 + PBKDF2 + AES-256-GCM + MEDIA KEY)
      ********************************************************************/
     const enc = new TextEncoder();
     const dec = new TextDecoder();
 
     function bytesToBase64(bytes) {
       let binary = '';
-      for (let i = 0; i < bytes.length; i++) binary += String.fromCharCode(bytes[i]);
+      const chunkSize = 0x8000;
+      for (let i = 0; i < bytes.length; i += chunkSize) {
+        binary += String.fromCharCode.apply(null, bytes.subarray(i, i + chunkSize));
+      }
       return btoa(binary);
     }
 
@@ -1348,17 +1578,137 @@
       return JSON.parse(dec.decode(new Uint8Array(plainBuffer)));
     }
 
+    // Fast, full-entropy 256-bit key stored inside encrypted diary.json for instant photo encryption/decryption
+    function ensureMediaKey() {
+      if (!session.diaryData.mediaKey) {
+        const raw = crypto.getRandomValues(new Uint8Array(32));
+        session.diaryData.mediaKey = bytesToBase64(raw);
+      }
+      return session.diaryData.mediaKey;
+    }
+
+    async function importMediaKey(mediaKeyB64) {
+      return crypto.subtle.importKey(
+        'raw',
+        base64ToBytes(mediaKeyB64),
+        { name: 'AES-GCM' },
+        false,
+        ['encrypt', 'decrypt']
+      );
+    }
+
+    async function encryptMediaPayload(plainObj, mediaKeyB64) {
+      const iv = crypto.getRandomValues(new Uint8Array(12));
+      const key = await importMediaKey(mediaKeyB64);
+      const plainBytes = enc.encode(JSON.stringify(plainObj));
+      const cipherBuffer = await crypto.subtle.encrypt({ name: 'AES-GCM', iv }, key, plainBytes);
+      return {
+        v: 3,
+        alg: 'AES-GCM-RAW',
+        iv: bytesToBase64(iv),
+        ct: bytesToBase64(new Uint8Array(cipherBuffer))
+      };
+    }
+
+    async function decryptMediaPayload(envelope, mediaKeyB64) {
+      if (!envelope || !envelope.iv || !envelope.ct) {
+        throw new Error('Invalid encrypted photo format.');
+      }
+      const iv = base64ToBytes(envelope.iv);
+      const ct = base64ToBytes(envelope.ct);
+      const key = await importMediaKey(mediaKeyB64);
+      const plainBuffer = await crypto.subtle.decrypt({ name: 'AES-GCM', iv }, key, ct);
+      return JSON.parse(dec.decode(new Uint8Array(plainBuffer)));
+    }
+
+    function isSafeImageDataUrl(url) {
+      return typeof url === 'string' && /^data:image\/(webp|jpeg|jpg|png|gif);base64,[A-Za-z0-9+/=]+$/i.test(url);
+    }
+
     /********************************************************************
-     * 3. SEAMLESS MIGRATION (MONTHS/DATES -> FLAT BLOG POSTS)
+     * 3. CLIENT-SIDE IMAGE COMPRESSION (CANVAS -> WEBP / JPEG)
+     ********************************************************************/
+    function formatBytesLabel(bytes) {
+      if (!bytes || bytes < 1024) return `${bytes || 0} B`;
+      const kb = bytes / 1024;
+      if (kb < 1024) return `${Math.round(kb)} KB`;
+      return `${(kb / 1024).toFixed(1)} MB`;
+    }
+
+    function compressImageFile(file) {
+      return new Promise((resolve, reject) => {
+        if (!file || !file.type.startsWith('image/')) {
+          return reject(new Error('Unsupported file type. Please choose an image.'));
+        }
+
+        const objectUrl = URL.createObjectURL(file);
+        const img = new Image();
+
+        img.onload = () => {
+          try {
+            let { width, height } = img;
+            if (width > MAX_IMAGE_EDGE || height > MAX_IMAGE_EDGE) {
+              if (width >= height) {
+                height = Math.round((height * MAX_IMAGE_EDGE) / width);
+                width = MAX_IMAGE_EDGE;
+              } else {
+                width = Math.round((width * MAX_IMAGE_EDGE) / height);
+                height = MAX_IMAGE_EDGE;
+              }
+            }
+
+            const canvas = document.createElement('canvas');
+            canvas.width = width;
+            canvas.height = height;
+            const ctx = canvas.getContext('2d');
+            ctx.fillStyle = '#fdfaf4';
+            ctx.fillRect(0, 0, width, height);
+            ctx.drawImage(img, 0, 0, width, height);
+
+            // Prefer WebP; fall back to JPEG if browser does not encode WebP
+            let dataUrl = canvas.toDataURL('image/webp', IMAGE_QUALITY);
+            if (!dataUrl.startsWith('data:image/webp')) {
+              dataUrl = canvas.toDataURL('image/jpeg', IMAGE_QUALITY);
+            }
+
+            const base64Part = dataUrl.slice(dataUrl.indexOf(',') + 1);
+            const compBytes = Math.round(base64Part.length * 0.75);
+
+            URL.revokeObjectURL(objectUrl);
+            resolve({
+              dataUrl,
+              origBytes: file.size,
+              compBytes,
+              sizeKb: Math.max(1, Math.round(compBytes / 1024))
+            });
+          } catch (err) {
+            URL.revokeObjectURL(objectUrl);
+            reject(err);
+          }
+        };
+
+        img.onerror = () => {
+          URL.revokeObjectURL(objectUrl);
+          reject(new Error(`Could not decode image "${file.name}".`));
+        };
+
+        img.src = objectUrl;
+      });
+    }
+
+    /********************************************************************
+     * 4. SEAMLESS MIGRATION (MONTHS/DATES -> FLAT BLOG POSTS + PHOTOS)
      ********************************************************************/
     function createStarterDiaryData(name = 'Pranav') {
       const now = Date.now();
       return {
+        mediaKey: null,
         posts: [
           {
             id: 'p_' + now,
             heading: `Welcome to ${name === 'Pranav' ? 'Pranav Diary' : name + "'s Diary"}`,
-            content: 'Your private journal is encrypted end-to-end with AES-256 using your Email and Password.\n\nWrite your dates, titles, and reflections freely—everything stays locked behind your personal key.',
+            content: 'Your private journal is encrypted end-to-end with AES-256 using your Email and Password.\n\nWrite your dates, titles, and reflections freely—and attach compressed photos anytime.',
+            photos: [],
             createdAt: now,
             updatedAt: now
           }
@@ -1371,16 +1721,16 @@
         return createStarterDiaryData(displayName);
       }
 
-      // Already in flat blog post format
       if (Array.isArray(rawData.posts)) {
         const posts = rawData.posts.map((p, idx) => ({
           id: p.id || `p_${Date.now()}_${idx}`,
           heading: String(p.heading || 'Untitled Entry'),
           content: String(p.content || ''),
+          photos: Array.isArray(p.photos) ? p.photos : [],
           createdAt: typeof p.createdAt === 'number' ? p.createdAt : (p.updatedAt || Date.now() - idx * 1000),
           updatedAt: typeof p.updatedAt === 'number' ? p.updatedAt : Date.now()
         }));
-        return { posts };
+        return { mediaKey: rawData.mediaKey || null, posts };
       }
 
       // Backward-compatible migration from legacy Months -> Entries structure
@@ -1403,15 +1753,10 @@
             const titlePart = (entry.title || '').trim();
             let heading = 'Untitled Entry';
 
-            if (datePart && titlePart) {
-              heading = `${datePart} — ${titlePart}`;
-            } else if (titlePart) {
-              heading = titlePart;
-            } else if (datePart) {
-              heading = datePart;
-            } else if (month.label) {
-              heading = month.label;
-            }
+            if (datePart && titlePart) heading = `${datePart} — ${titlePart}`;
+            else if (titlePart) heading = titlePart;
+            else if (datePart) heading = datePart;
+            else if (month.label) heading = month.label;
 
             let parsedTime = entry.updatedAt || null;
             if (!parsedTime && entry.isoDate) {
@@ -1427,20 +1772,21 @@
               id: entry.id || `p_${parsedTime}_${idx}`,
               heading,
               content: String(entry.content || ''),
+              photos: [],
               createdAt: parsedTime,
               updatedAt: entry.updatedAt || parsedTime
             });
           });
         });
 
-        return { posts: migratedPosts };
+        return { mediaKey: null, posts: migratedPosts };
       }
 
       return createStarterDiaryData(displayName);
     }
 
     /********************************************************************
-     * 4. LOCAL STORAGE HELPERS (PUBLIC ACCOUNTS)
+     * 5. LOCAL STORAGE HELPERS (PUBLIC ACCOUNTS)
      ********************************************************************/
     function getLocalUsersMap() {
       try {
@@ -1455,7 +1801,7 @@
     }
 
     /********************************************************************
-     * 5. GITHUB REST API HELPERS (ADMIN CLOUD VAULT)
+     * 6. GITHUB REST API HELPERS (ADMIN CLOUD VAULT)
      ********************************************************************/
     async function githubGetFile(owner, repo, path, token = null) {
       const headers = { 'Accept': 'application/vnd.github.v3+json' };
@@ -1507,8 +1853,26 @@
       return out.content.sha;
     }
 
+    async function githubDeleteFile(owner, repo, path, message, token) {
+      try {
+        const existing = await githubGetFile(owner, repo, path, token);
+        if (!existing || !existing.sha) return;
+        await fetch(`https://api.github.com/repos/${owner}/${repo}/contents/${path}`, {
+          method: 'DELETE',
+          headers: {
+            'Accept': 'application/vnd.github.v3+json',
+            'Authorization': `Bearer ${token}`,
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ message, sha: existing.sha })
+        });
+      } catch {
+        // Best-effort cleanup; ignore errors so primary save flow stays smooth
+      }
+    }
+
     /********************************************************************
-     * 6. BOOT & AUTH VIEW SWITCHING
+     * 7. BOOT & AUTH VIEW SWITCHING
      ********************************************************************/
     async function loadLatestAuthRegistry() {
       let authFile = await githubGetFile(
@@ -1529,6 +1893,7 @@
 
     async function initApp() {
       applySavedFontPref();
+      setupPhotoInputHandlers();
 
       try {
         const authFile = await loadLatestAuthRegistry();
@@ -1598,7 +1963,7 @@
     }
 
     /********************************************************************
-     * 7. ONE-TIME ADMIN SETUP
+     * 8. ONE-TIME ADMIN SETUP
      ********************************************************************/
     document.getElementById('setupForm').addEventListener('submit', async (e) => {
       e.preventDefault();
@@ -1718,7 +2083,7 @@
     });
 
     /********************************************************************
-     * 8. UNIFIED SIGN-IN (CLOUD ADMIN VAULT + LOCAL PUBLIC VAULTS)
+     * 9. UNIFIED SIGN-IN (CLOUD ADMIN VAULT + LOCAL PUBLIC VAULTS)
      ********************************************************************/
     document.getElementById('loginForm').addEventListener('submit', async (e) => {
       e.preventDefault();
@@ -1880,7 +2245,7 @@
     }
 
     /********************************************************************
-     * 9. PUBLIC ACCOUNT REGISTRATION
+     * 10. PUBLIC ACCOUNT REGISTRATION
      ********************************************************************/
     document.getElementById('publicRegisterForm').addEventListener('submit', async (e) => {
       e.preventDefault();
@@ -1943,7 +2308,7 @@
     });
 
     /********************************************************************
-     * 10. PASSWORD ROTATION (PRE-LOGIN & IN-APP)
+     * 11. PASSWORD ROTATION (PRE-LOGIN & IN-APP)
      ********************************************************************/
     async function executeUserPasswordRotation(emailInput, oldPassword, newPassword) {
       const email = normalizeEmail(emailInput);
@@ -2103,7 +2468,7 @@
     });
 
     /********************************************************************
-     * 11. ADMIN-ONLY TOKEN ROTATION
+     * 12. ADMIN-ONLY TOKEN ROTATION
      ********************************************************************/
     function openAdminModal() {
       if (session.role !== 'admin' || session.storageMode !== 'github') return;
@@ -2155,7 +2520,7 @@
     }
 
     /********************************************************************
-     * 12. 5-MINUTE INACTIVITY AUTO-LOCK
+     * 13. 5-MINUTE INACTIVITY AUTO-LOCK
      ********************************************************************/
     function resetActivityTimer() {
       if (!session.unlocked) return;
@@ -2202,8 +2567,13 @@
       session.email = null;
       session.password = null;
       session.token = null;
-      session.diaryData = { posts: [] };
+      session.diaryData = { mediaKey: null, posts: [] };
+      session.mediaCache.clear();
+      session.mediaPending.clear();
+      draftPhotos = [];
+      removedGithubPhotoPaths = [];
 
+      closeLightbox();
       document.querySelectorAll('.modal-backdrop').forEach(m => m.classList.remove('open'));
       document.getElementById('postsFeed').innerHTML = '';
       document.getElementById('searchInput').value = '';
@@ -2215,7 +2585,7 @@
     }
 
     /********************************************************************
-     * 13. EDITORIAL BLOG FEED & SAVE LOGIC
+     * 14. ENCRYPTED PHOTO LOADING, LIGHTBOX & EDITORIAL FEED
      ********************************************************************/
     function enterUnlockedApp() {
       document.getElementById('authWrapper').style.display = 'none';
@@ -2243,7 +2613,7 @@
 
     function sortPosts() {
       if (!session.diaryData || !Array.isArray(session.diaryData.posts)) {
-        session.diaryData = { posts: [] };
+        session.diaryData = { mediaKey: null, posts: [] };
       }
       session.diaryData.posts.sort((a, b) => (b.createdAt || 0) - (a.createdAt || 0));
     }
@@ -2274,7 +2644,11 @@
           const localUsers = getLocalUsersMap();
           if (localUsers[session.userHash]) {
             localUsers[session.userHash].encryptedDiary = encryptedDiary;
-            saveLocalUsersMap(localUsers);
+            try {
+              saveLocalUsersMap(localUsers);
+            } catch (quotaErr) {
+              throw new Error('Browser storage is full. Try removing a photo.');
+            }
           }
         }
 
@@ -2282,10 +2656,12 @@
         pill.classList.add('saved');
         text.textContent = 'Saved';
         showToast('Saved & encrypted', 'success');
+        return true;
       } catch (err) {
         pill.classList.remove('syncing');
         text.textContent = 'Save Error';
         showToast(`Could not save: ${err.message}`, 'error');
+        return false;
       }
     }
 
@@ -2302,6 +2678,80 @@
       const words = String(text || '').trim().split(/\s+/).filter(Boolean).length;
       const mins = Math.max(1, Math.round(words / 200));
       return `${mins} min read`;
+    }
+
+    async function fetchAndDecryptGithubPhoto(photo) {
+      if (session.mediaCache.has(photo.id)) {
+        return session.mediaCache.get(photo.id);
+      }
+      if (session.mediaPending.has(photo.id)) {
+        return session.mediaPending.get(photo.id);
+      }
+
+      const task = (async () => {
+        if (!session.unlocked || !session.diaryData.mediaKey) return null;
+        const fileRes = await githubGetFile(session.owner, session.privateRepo, photo.path, session.token);
+        if (!session.unlocked || !fileRes || !fileRes.content) return null;
+        const decrypted = await decryptMediaPayload(fileRes.content, session.diaryData.mediaKey);
+        if (!session.unlocked || !decrypted || !isSafeImageDataUrl(decrypted.dataUrl)) return null;
+        session.mediaCache.set(photo.id, decrypted.dataUrl);
+        return decrypted.dataUrl;
+      })().finally(() => {
+        session.mediaPending.delete(photo.id);
+      });
+
+      session.mediaPending.set(photo.id, task);
+      return task;
+    }
+
+    function mountLoadedImage(tileEl, dataUrl) {
+      tileEl.innerHTML = '';
+      const img = document.createElement('img');
+      img.src = dataUrl;
+      img.alt = 'Attached diary photo';
+      img.loading = 'lazy';
+      tileEl.appendChild(img);
+      tileEl.classList.add('loaded');
+    }
+
+    function hydrateFeedPhotos() {
+      const tiles = document.querySelectorAll('.photo-tile[data-storage="github"]');
+      tiles.forEach(async (tile) => {
+        const photoId = tile.getAttribute('data-photo-id');
+        const path = tile.getAttribute('data-photo-path');
+        if (!photoId || !path) return;
+
+        if (session.mediaCache.has(photoId)) {
+          mountLoadedImage(tile, session.mediaCache.get(photoId));
+          return;
+        }
+
+        try {
+          const dataUrl = await fetchAndDecryptGithubPhoto({ id: photoId, path });
+          if (!session.unlocked || !tile.isConnected) return;
+          if (dataUrl) {
+            mountLoadedImage(tile, dataUrl);
+          } else {
+            tile.innerHTML = '<div class="photo-placeholder">Photo unavailable</div>';
+          }
+        } catch {
+          if (tile.isConnected) {
+            tile.innerHTML = '<div class="photo-placeholder">Could not decrypt photo</div>';
+          }
+        }
+      });
+    }
+
+    function openLightbox(src) {
+      if (!isSafeImageDataUrl(src)) return;
+      document.getElementById('lightboxImage').src = src;
+      document.getElementById('lightboxModal').classList.add('open');
+    }
+
+    function closeLightbox(e = null) {
+      if (e && e.target && e.target.id === 'lightboxImage') return;
+      document.getElementById('lightboxModal').classList.remove('open');
+      document.getElementById('lightboxImage').src = '';
     }
 
     function renderFeed() {
@@ -2345,35 +2795,194 @@
         return;
       }
 
-      feed.innerHTML = filtered.map((post, idx) => `
-        <article class="blog-post" data-post-id="${escapeHtml(post.id)}">
-          <div class="post-header">
-            <h2 class="post-heading">${escapeHtml(post.heading)}</h2>
-            <div class="post-tools">
-              <span class="read-time">${estimateReadTime(post.content)}</span>
-              <button type="button" class="icon-btn" data-action="edit" data-post-id="${escapeHtml(post.id)}" title="Edit Entry">✎</button>
-              <button type="button" class="icon-btn delete" data-action="delete" data-post-id="${escapeHtml(post.id)}" title="Delete Entry">✕</button>
+      feed.innerHTML = filtered.map((post, idx) => {
+        const photos = Array.isArray(post.photos) ? post.photos : [];
+        const photosHtml = photos.length > 0
+          ? `<div class="post-photos ${photos.length === 1 ? 'single' : ''}">
+              ${photos.map(ph => {
+                if (ph.storage === 'inline' && isSafeImageDataUrl(ph.dataUrl)) {
+                  return `
+                    <div class="photo-tile loaded" data-storage="inline" data-photo-id="${escapeHtml(ph.id)}">
+                      <img src="${ph.dataUrl}" alt="Attached diary photo" loading="lazy" />
+                    </div>
+                  `;
+                }
+                const cached = session.mediaCache.get(ph.id);
+                if (cached && isSafeImageDataUrl(cached)) {
+                  return `
+                    <div class="photo-tile loaded" data-storage="github" data-photo-id="${escapeHtml(ph.id)}" data-photo-path="${escapeHtml(ph.path)}">
+                      <img src="${cached}" alt="Attached diary photo" loading="lazy" />
+                    </div>
+                  `;
+                }
+                return `
+                  <div class="photo-tile" data-storage="github" data-photo-id="${escapeHtml(ph.id)}" data-photo-path="${escapeHtml(ph.path)}">
+                    <div class="photo-placeholder">Decrypting photo…</div>
+                  </div>
+                `;
+              }).join('')}
+            </div>`
+          : '';
+
+        return `
+          <article class="blog-post" data-post-id="${escapeHtml(post.id)}">
+            <div class="post-header">
+              <h2 class="post-heading">${escapeHtml(post.heading)}</h2>
+              <div class="post-tools">
+                <span class="read-time">${estimateReadTime(post.content)}</span>
+                <button type="button" class="icon-btn" data-action="edit" data-post-id="${escapeHtml(post.id)}" title="Edit Entry">✎</button>
+                <button type="button" class="icon-btn delete" data-action="delete" data-post-id="${escapeHtml(post.id)}" title="Delete Entry">✕</button>
+              </div>
             </div>
-          </div>
-          <div class="post-body">${escapeHtml(post.content)}</div>
-        </article>
-        ${idx < filtered.length - 1 ? '<div class="post-separator" aria-hidden="true">✦</div>' : ''}
-      `).join('');
+            <div class="post-body">${escapeHtml(post.content)}</div>
+            ${photosHtml}
+          </article>
+          ${idx < filtered.length - 1 ? '<div class="post-separator" aria-hidden="true">✦</div>' : ''}
+        `;
+      }).join('');
+
+      hydrateFeedPhotos();
     }
 
-    // Event delegation for Edit / Delete buttons (avoids inline JS string interpolation)
+    // Event delegation for Edit, Delete, and Lightbox clicks
     document.getElementById('postsFeed').addEventListener('click', (e) => {
       const btn = e.target.closest('button[data-action]');
-      if (!btn) return;
-      const postId = btn.getAttribute('data-post-id');
-      const action = btn.getAttribute('data-action');
-      if (action === 'edit') openPostModal(postId);
-      if (action === 'delete') deletePost(postId);
+      if (btn) {
+        const postId = btn.getAttribute('data-post-id');
+        const action = btn.getAttribute('data-action');
+        if (action === 'edit') openPostModal(postId);
+        if (action === 'delete') deletePost(postId);
+        return;
+      }
+
+      const tile = e.target.closest('.photo-tile.loaded');
+      if (tile) {
+        const img = tile.querySelector('img');
+        if (img && img.src) openLightbox(img.src);
+      }
     });
 
     /********************************************************************
-     * 14. WRITE / EDIT / DELETE POSTS
+     * 15. WRITE / EDIT / DELETE POSTS & PHOTO ATTACHMENTS
      ********************************************************************/
+    function setupPhotoInputHandlers() {
+      const fileInput = document.getElementById('photoFileInput');
+      const dropzone = document.getElementById('photoDropzone');
+      const postModal = document.getElementById('postModal');
+
+      fileInput.addEventListener('change', async (e) => {
+        if (e.target.files && e.target.files.length > 0) {
+          await handleIncomingPhotoFiles(Array.from(e.target.files));
+          fileInput.value = '';
+        }
+      });
+
+      ['dragenter', 'dragover'].forEach(evt => {
+        dropzone.addEventListener(evt, (e) => {
+          e.preventDefault();
+          dropzone.classList.add('dragover');
+        });
+      });
+
+      ['dragleave', 'drop'].forEach(evt => {
+        dropzone.addEventListener(evt, (e) => {
+          e.preventDefault();
+          dropzone.classList.remove('dragover');
+        });
+      });
+
+      dropzone.addEventListener('drop', async (e) => {
+        const files = Array.from(e.dataTransfer.files || []).filter(f => f.type.startsWith('image/'));
+        if (files.length > 0) await handleIncomingPhotoFiles(files);
+      });
+
+      // Allow pasting screenshots directly when writer modal is open
+      postModal.addEventListener('paste', async (e) => {
+        const items = Array.from((e.clipboardData && e.clipboardData.items) || []);
+        const imageFiles = items
+          .filter(it => it.type && it.type.startsWith('image/'))
+          .map(it => it.getAsFile())
+          .filter(Boolean);
+        if (imageFiles.length > 0) {
+          e.preventDefault();
+          await handleIncomingPhotoFiles(imageFiles);
+        }
+      });
+    }
+
+    async function handleIncomingPhotoFiles(files) {
+      const remainingSlots = MAX_PHOTOS_PER_POST - draftPhotos.length;
+      if (remainingSlots <= 0) {
+        showToast(`Maximum ${MAX_PHOTOS_PER_POST} photos per entry.`, 'error');
+        return;
+      }
+
+      const toProcess = files.slice(0, remainingSlots);
+      if (files.length > remainingSlots) {
+        showToast(`Only the first ${remainingSlots} photo(s) were added (max ${MAX_PHOTOS_PER_POST}).`, 'error');
+      }
+
+      const btn = document.getElementById('attachPhotoBtn');
+      btn.disabled = true;
+      btn.textContent = 'Compressing...';
+
+      try {
+        for (const file of toProcess) {
+          const compressed = await compressImageFile(file);
+          const id = 'img_' + Date.now() + '_' + Math.random().toString(36).slice(2, 7);
+          draftPhotos.push({
+            id,
+            status: 'new',
+            storage: session.storageMode === 'github' ? 'github' : 'inline',
+            path: session.storageMode === 'github' ? `media/${id}.json` : null,
+            dataUrl: compressed.dataUrl,
+            sizeKb: compressed.sizeKb,
+            label: `${formatBytesLabel(compressed.origBytes)} → ${formatBytesLabel(compressed.compBytes)}`
+          });
+        }
+        renderDraftPhotos();
+      } catch (err) {
+        showToast(err.message || 'Could not compress photo.', 'error');
+      } finally {
+        btn.disabled = false;
+        btn.textContent = '+ Attach Photos';
+      }
+    }
+
+    function renderDraftPhotos() {
+      const grid = document.getElementById('draftPhotosGrid');
+      if (draftPhotos.length === 0) {
+        grid.style.display = 'none';
+        grid.innerHTML = '';
+        return;
+      }
+
+      grid.style.display = 'grid';
+      grid.innerHTML = draftPhotos.map((ph, idx) => `
+        <div class="draft-photo-card">
+          ${ph.dataUrl
+            ? `<img src="${ph.dataUrl}" alt="Draft photo preview" />`
+            : `<div class="photo-placeholder" style="height: 92px; display:flex; align-items:center; justify-content:center;">Decrypting…</div>`
+          }
+          <button type="button" class="draft-photo-remove" data-remove-idx="${idx}" title="Remove photo">✕</button>
+          <div class="draft-photo-meta mono">${escapeHtml(ph.label || `${ph.sizeKb || '?'} KB`)}</div>
+        </div>
+      `).join('');
+    }
+
+    document.getElementById('draftPhotosGrid').addEventListener('click', (e) => {
+      const btn = e.target.closest('button[data-remove-idx]');
+      if (!btn) return;
+      const idx = Number(btn.getAttribute('data-remove-idx'));
+      const removed = draftPhotos[idx];
+      if (!removed) return;
+      if (removed.status === 'existing' && removed.storage === 'github' && removed.path) {
+        removedGithubPhotoPaths.push(removed.path);
+      }
+      draftPhotos.splice(idx, 1);
+      renderDraftPhotos();
+    });
+
     function updateWordCount() {
       const text = document.getElementById('postContent').value.trim();
       const count = text ? text.split(/\s+/).length : 0;
@@ -2388,6 +2997,9 @@
       const contentInput = document.getElementById('postContent');
       const saveBtn = document.getElementById('savePostBtn');
 
+      draftPhotos = [];
+      removedGithubPhotoPaths = [];
+
       if (postId) {
         const post = session.diaryData.posts.find(p => p.id === postId);
         if (!post) return;
@@ -2396,6 +3008,28 @@
         idInput.value = post.id;
         headingInput.value = post.heading || '';
         contentInput.value = post.content || '';
+
+        const existingPhotos = Array.isArray(post.photos) ? post.photos : [];
+        draftPhotos = existingPhotos.map(ph => ({
+          id: ph.id,
+          status: 'existing',
+          storage: ph.storage || 'github',
+          path: ph.path || null,
+          dataUrl: ph.storage === 'inline' ? ph.dataUrl : (session.mediaCache.get(ph.id) || null),
+          sizeKb: ph.sizeKb || 0,
+          label: ph.sizeKb ? `${ph.sizeKb} KB` : 'Attached'
+        }));
+
+        // Fetch any uncached github thumbnails for preview
+        draftPhotos.forEach(async (item) => {
+          if (item.storage === 'github' && !item.dataUrl && item.path) {
+            const url = await fetchAndDecryptGithubPhoto(item).catch(() => null);
+            if (url && document.getElementById('postModal').classList.contains('open')) {
+              item.dataUrl = url;
+              renderDraftPhotos();
+            }
+          }
+        });
       } else {
         titleEl.textContent = 'New Entry';
         saveBtn.textContent = 'Publish to Vault';
@@ -2404,6 +3038,7 @@
         contentInput.value = '';
       }
 
+      renderDraftPhotos();
       updateWordCount();
       modal.classList.add('open');
       setTimeout(() => (postId ? contentInput : headingInput).focus(), 50);
@@ -2418,31 +3053,92 @@
       const editId = document.getElementById('editPostId').value;
       const heading = document.getElementById('postHeading').value.trim();
       const content = document.getElementById('postContent').value;
+      const saveBtn = document.getElementById('savePostBtn');
 
       if (!heading) return;
 
-      if (editId) {
-        const existing = session.diaryData.posts.find(p => p.id === editId);
-        if (existing) {
-          existing.heading = heading;
-          existing.content = content;
-          existing.updatedAt = Date.now();
-        }
-      } else {
-        const now = Date.now();
-        session.diaryData.posts.unshift({
-          id: 'p_' + now,
-          heading,
-          content,
-          createdAt: now,
-          updatedAt: now
-        });
-      }
+      const origBtnText = saveBtn.textContent;
+      saveBtn.disabled = true;
 
-      closePostModal();
-      sortPosts();
-      renderFeed();
-      await saveDiaryChanges(editId ? `Edit entry: ${heading}` : `Add entry: ${heading}`);
+      try {
+        const finalPhotos = [];
+        const hasNewGithubPhotos = session.storageMode === 'github' && draftPhotos.some(p => p.status === 'new');
+        const mediaKey = hasNewGithubPhotos ? ensureMediaKey() : session.diaryData.mediaKey;
+
+        for (let i = 0; i < draftPhotos.length; i++) {
+          const item = draftPhotos[i];
+          if (session.storageMode === 'github') {
+            if (item.status === 'new') {
+              saveBtn.textContent = `Encrypting photo ${i + 1}/${draftPhotos.length}...`;
+              const encryptedMedia = await encryptMediaPayload({ dataUrl: item.dataUrl }, mediaKey);
+              await githubPutFile(
+                session.owner,
+                session.privateRepo,
+                item.path,
+                encryptedMedia,
+                `Add encrypted photo ${item.id}`,
+                session.token
+              );
+              session.mediaCache.set(item.id, item.dataUrl);
+            }
+            finalPhotos.push({
+              id: item.id,
+              storage: 'github',
+              path: item.path,
+              sizeKb: item.sizeKb
+            });
+          } else {
+            finalPhotos.push({
+              id: item.id,
+              storage: 'inline',
+              dataUrl: item.dataUrl,
+              sizeKb: item.sizeKb
+            });
+          }
+        }
+
+        saveBtn.textContent = 'Saving entry...';
+
+        if (editId) {
+          const existing = session.diaryData.posts.find(p => p.id === editId);
+          if (existing) {
+            existing.heading = heading;
+            existing.content = content;
+            existing.photos = finalPhotos;
+            existing.updatedAt = Date.now();
+          }
+        } else {
+          const now = Date.now();
+          session.diaryData.posts.unshift({
+            id: 'p_' + now,
+            heading,
+            content,
+            photos: finalPhotos,
+            createdAt: now,
+            updatedAt: now
+          });
+        }
+
+        const saved = await saveDiaryChanges(editId ? `Edit entry: ${heading}` : `Add entry: ${heading}`);
+        if (saved) {
+          // Clean up any removed GitHub photo files in background
+          if (session.storageMode === 'github' && removedGithubPhotoPaths.length > 0) {
+            const pathsToClean = [...removedGithubPhotoPaths];
+            removedGithubPhotoPaths = [];
+            pathsToClean.forEach(path => {
+              githubDeleteFile(session.owner, session.privateRepo, path, `Remove photo ${path}`, session.token);
+            });
+          }
+          closePostModal();
+          sortPosts();
+          renderFeed();
+        }
+      } catch (err) {
+        showToast(`Could not save entry: ${err.message}`, 'error');
+      } finally {
+        saveBtn.disabled = false;
+        saveBtn.textContent = origBtnText;
+      }
     });
 
     async function deletePost(postId) {
@@ -2450,14 +3146,24 @@
       if (!post) return;
       if (!confirm(`Delete "${post.heading}" permanently?`)) return;
 
+      const githubPhotosToDelete = (post.photos || []).filter(p => p.storage === 'github' && p.path);
+
       session.diaryData.posts = session.diaryData.posts.filter(p => p.id !== postId);
       renderFeed();
-      await saveDiaryChanges(`Delete entry: ${post.heading}`);
+      const saved = await saveDiaryChanges(`Delete entry: ${post.heading}`);
+
+      if (saved && session.storageMode === 'github' && githubPhotosToDelete.length > 0) {
+        githubPhotosToDelete.forEach(p => {
+          session.mediaCache.delete(p.id);
+          githubDeleteFile(session.owner, session.privateRepo, p.path, `Delete photo ${p.id}`, session.token);
+        });
+      }
     }
 
-    // Keyboard shortcuts: Escape closes modals, Cmd/Ctrl+Enter saves in writer
+    // Keyboard shortcuts: Escape closes modals/lightbox, Cmd/Ctrl+Enter saves in writer
     document.addEventListener('keydown', (e) => {
       if (e.key === 'Escape') {
+        closeLightbox();
         closePostModal();
         closeInAppPasswordModal();
         closeAdminModal();
